@@ -1,0 +1,192 @@
+{
+ "merlin": {
+  "outfit_style": "robe",
+  "outfit": "#2c3566",
+  "outfit2": "#d8b45a",
+  "skin": "#e8b896",
+  "hair": "long",
+  "hair_color": "#e8e6e0",
+  "beard": "wizard",
+  "hat": "wizard",
+  "accessory": "none",
+  "prop": "staff",
+  "mug": "#3a3f7a",
+  "decor": [
+   "crystal_ball",
+   "books",
+   "candle"
+  ],
+  "motto": "Orchestrating the magic, one task at a time."
+ },
+ "jr": {
+  "outfit_style": "blazer",
+  "outfit": "#24324e",
+  "outfit2": "#f2efe8",
+  "skin": "#e2b08c",
+  "hair": "short",
+  "hair_color": "#8a8580",
+  "beard": "stubble",
+  "hat": "none",
+  "accessory": "cross_pin",
+  "prop": "bible",
+  "mug": "#7a1f1f",
+  "decor": [
+   "candle",
+   "photo",
+   "plant"
+  ],
+  "motto": "Grace for today, purpose for tomorrow."
+ },
+ "jocko": {
+  "outfit_style": "tee",
+  "outfit": "#18181a",
+  "outfit2": "#3a3a3c",
+  "skin": "#d9a37e",
+  "hair": "bald",
+  "hair_color": "#6a5a4c",
+  "beard": "full",
+  "hat": "none",
+  "accessory": "none",
+  "prop": "coffee",
+  "mug": "#111111",
+  "decor": [
+   "dumbbell",
+   "trophy",
+   "books"
+  ],
+  "motto": "Discipline equals freedom."
+ },
+ "sage": {
+  "outfit_style": "athleisure",
+  "outfit": "#3f7a5e",
+  "outfit2": "#d8e8d0",
+  "skin": "#c98e6a",
+  "hair": "ponytail",
+  "hair_color": "#3a2618",
+  "beard": "none",
+  "hat": "headband",
+  "accessory": "leaf_pin",
+  "prop": "water_bottle",
+  "mug": "#6fae7a",
+  "decor": [
+   "plant",
+   "herbs",
+   "crystal_ball"
+  ],
+  "motto": "Sleep, sunlight, strength. Repeat."
+ },
+ "mick": {
+  "outfit_style": "chef_coat",
+  "outfit": "#f4f1ea",
+  "outfit2": "#c0392b",
+  "skin": "#e6b28e",
+  "hair": "short",
+  "hair_color": "#5a3a22",
+  "beard": "goatee",
+  "hat": "chef",
+  "accessory": "none",
+  "prop": "spatula",
+  "mug": "#c0392b",
+  "decor": [
+   "herbs",
+   "books",
+   "trophy"
+  ],
+  "motto": "Fuel first. Flavor always."
+ },
+ "shoppy": {
+  "outfit_style": "cardigan",
+  "outfit": "#e8845a",
+  "outfit2": "#fff2d8",
+  "skin": "#f0c4a0",
+  "hair": "curly",
+  "hair_color": "#7a3a1a",
+  "beard": "none",
+  "hat": "none",
+  "accessory": "scarf",
+  "prop": "shopping_bags",
+  "mug": "#ffb84a",
+  "decor": [
+   "photo",
+   "cactus",
+   "pennant"
+  ],
+  "motto": "Best deal or no deal."
+ },
+ "scout": {
+  "outfit_style": "explorer",
+  "outfit": "#a8875a",
+  "outfit2": "#5a4a30",
+  "skin": "#d6a07a",
+  "hair": "short",
+  "hair_color": "#6a4a2a",
+  "beard": "stubble",
+  "hat": "explorer",
+  "accessory": "binoculars",
+  "prop": "none",
+  "mug": "#2f7a6a",
+  "decor": [
+   "globe",
+   "map",
+   "plant"
+  ],
+  "motto": "Every opening is a trail worth checking."
+ },
+ "quill": {
+  "outfit_style": "sweater_vest",
+  "outfit": "#7a3a3a",
+  "outfit2": "#e8e2d6",
+  "skin": "#ecc2a0",
+  "hair": "side_part",
+  "hair_color": "#2a1e16",
+  "beard": "none",
+  "hat": "none",
+  "accessory": "glasses",
+  "prop": "quill",
+  "mug": "#f2f0ea",
+  "decor": [
+   "books",
+   "candle",
+   "photo"
+  ],
+  "motto": "Every word earns its place."
+ },
+ "ness": {
+  "outfit_style": "cardigan",
+  "outfit": "#7a5a9a",
+  "outfit2": "#f0e6f4",
+  "skin": "#d8a888",
+  "hair": "bun",
+  "hair_color": "#2a1a22",
+  "beard": "none",
+  "hat": "none",
+  "accessory": "headset",
+  "prop": "notebook",
+  "mug": "#b88ad8",
+  "decor": [
+   "plant",
+   "candle",
+   "headphones"
+  ],
+  "motto": "Breathe in. Check in. Level up."
+ },
+ "manny": {
+  "outfit_style": "work_vest",
+  "outfit": "#f07a1a",
+  "outfit2": "#3a4a5a",
+  "skin": "#c88e66",
+  "hair": "buzz",
+  "hair_color": "#2a2018",
+  "beard": "stubble",
+  "hat": "hard_hat",
+  "accessory": "safety_glasses",
+  "prop": "wrench",
+  "mug": "#f2c230",
+  "decor": [
+   "toolbox",
+   "headphones",
+   "trophy"
+  ],
+  "motto": "If it can be built, I'm building it."
+ }
+}
