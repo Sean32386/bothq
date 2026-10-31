@@ -202,12 +202,12 @@
   "motto": "If it can be built, I'm building it."
  },
  "pixel": {
-  "outfit_style": "cardigan",
+  "outfit_style": "tee",
   "outfit": "#1fb5a8",
   "outfit2": "#e84393",
   "skin": "#e0ac88",
   "hair": "short",
-  "hair_color": "#2a2018",
+  "hair_color": "#1a1a1a",
   "beard": "none",
   "hat": "beanie",
   "accessory": "headset",
@@ -219,10 +219,10 @@
    "photo"
   ],
   "motto": "Make it beautiful, make it true.",
-  "build": "average",
+  "build": "athletic",
   "expression": "smile",
   "eye_color": "#5a3a22",
-  "face": "masc",
+  "face": "fem",
   "patch": "star"
  }
 }
