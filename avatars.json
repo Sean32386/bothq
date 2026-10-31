@@ -209,7 +209,7 @@
   "hair": "short",
   "hair_color": "#1a1a1a",
   "beard": "none",
-  "hat": "beanie",
+  "hat": "beret",
   "accessory": "headset",
   "prop": "notebook",
   "mug": "#ffc93c",
@@ -223,6 +223,8 @@
   "expression": "smile",
   "eye_color": "#5a3a22",
   "face": "fem",
-  "patch": "star"
+  "patch": "star",
+  "ears": "elf",
+  "wings": "iridescent"
  }
 }
