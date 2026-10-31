@@ -12,6 +12,39 @@ def shell(body,name,pick,off,smooth=4,mat=None):
   bm.to_mesh(o.data);bm.free()
   o.data.materials.clear();o.data.materials.append(mat)
   return o
+def tailor(o,z0,H):
+  # hang the jacket: bridge under-bust/waist on the front and lumbar on the back, flare hem, pad shoulders
+  me=o.data;V=me.vertices;B=.02*H
+  F=lambda v:(v.co.z-z0)/H
+  col=lambda x:int(round(x/B))
+  def I(d,x):
+    a=math.floor(x/B);b=a+1;w=x/B-a
+    if a in d and b in d:return d[a]*(1-w)+d[b]*w
+    return d.get(col(x))
+  apex={};blade={};hemf={};hemb={}
+  for v in V:
+    f=F(v);x,y=v.co.x,v.co.y;k=col(x)
+    if abs(x)>.13*H:continue
+    if .70<f<.77:apex[k]=min(apex.get(k,9),y);blade[k]=max(blade.get(k,-9),y)
+    if .47<f<.53:hemf[k]=min(hemf.get(k,9),y);hemb[k]=max(hemb.get(k,-9),y)
+  fa=.735
+  for v in V:
+    f=F(v);x=v.co.x;k=col(x)
+    if abs(x)<.13*H and .47<f<fa and k in apex and k in hemf:
+      t=(fa-f)/(fa-.47);t=t*t*(3-2*t)
+      if v.co.y<0:
+        tg=I(apex,x)+(I(hemf,x)-I(apex,x))*t
+        if tg<v.co.y:v.co.y+=(tg-v.co.y)*.8
+      else:
+        tg=I(blade,x)+(I(hemb,x)-I(blade,x))*t
+        if tg>v.co.y:v.co.y+=(tg-v.co.y)*.7
+    if f<.54 and abs(x)<.16*H:v.co.x*=1+(.54-f)*.6
+    if .78<f<.83 and .09*H<abs(x)<.14*H:v.co.z+=.006;v.co.x+=.006*(1 if x>0 else -1)
+  bm=bmesh.new();bm.from_mesh(me);sv=[v for v in bm.verts if .44<(v.co.z-z0)/H<.78]
+  for _ in range(6):bmesh.ops.smooth_vert(bm,verts=sv,factor=.5,use_axis_x=True,use_axis_y=True,use_axis_z=True)
+  bm.to_mesh(me);bm.free()
+  m=o.modifiers.new('sol','SOLIDIFY');m.thickness=.004;m.offset=1;m.use_rim=True
+  bpy.context.view_layer.objects.active=o;bpy.ops.object.modifier_apply(modifier='sol')
 def build(body,ao,z0,H):
   me=body.data;V=me.vertices
   D=[dom(body,v) for v in V]
@@ -32,7 +65,8 @@ def build(body,ao,z0,H):
     elif (torso and .47<f<.835 and not vneck) or (arm and f>.4 and not hand):bl[i]=True
     if torso and .6<f<.85 and front and ax<.06*H:sh[i]=True
     if (leg or (torso and f<.57)) and .055<f<.57:pa[i]=True
-  objs=[shell(body,'blazer',bl,.011,5,M['blazer']),shell(body,'shirt',sh,.005,5,M['shirt']),shell(body,'pants',pa,.006,4,M['pants']),shell(body,'shoes',so,.005,2,M['shoes'])]
+  bz=shell(body,'blazer',bl,.016,6,M['blazer']);tailor(bz,z0,H)
+  objs=[bz,shell(body,'shirt',sh,.005,5,M['shirt']),shell(body,'pants',pa,.006,4,M['pants']),shell(body,'shoes',so,.005,2,M['shoes'])]
   # hide body under clothes (keep a margin under shirt V and cuffs)
   bm=bmesh.new();bm.from_mesh(me);bm.faces.ensure_lookup_table()
   kill=[bm.faces[i] for i in range(n) if (bl[i] or pa[i] or so[i] or sh[i])]
