@@ -61,6 +61,6 @@ Original AI-generated artwork made by Pixel for Bot HQ; license: `art/textures/L
 
 ## Sage `?realchar2` model (`assets/models/opt/realchar2_sage.glb`)
 - Visual target: Pixel's refsheet `art/sage/refsheet.png`.
-- Base shape: generated from the refsheet's front view with **Hunyuan3D-2** (Tencent, `hunyuan3d-dit-v2-0`, via the public `tencent/Hunyuan3D-2` Space, shape only). Licence: Tencent Hunyuan 3D 2.0 Community License. It does **not** grant rights in the EU, UK or South Korea, and products above 1M monthly active users need a separate licence from Tencent.
+- Base shape: generated for all 11 bots (from Pixel's `art/<bot>/a_pose.png`) with **Hunyuan3D-2** (Tencent, `hunyuan3d-dit-v2-0`, via the public `tencent/Hunyuan3D-2` Space, shape only). Licence: Tencent Hunyuan 3D 2.0 Community License. It does **not** grant rights in the EU, UK or South Korea, and products above 1M monthly active users need a separate licence from Tencent.
 - Texture: our own orthographic projection of the refsheet front and side views, baked in Blender (`realchar2/build_gen.py`). Hunyuan's texture model was not used.
 - Rig: same 17-bone skeleton as `?realchar`, with Blender automatic weights. Compressed with gltf-transform (WebP + meshopt).
