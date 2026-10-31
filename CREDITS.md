@@ -44,3 +44,6 @@ Other textures, HDRIs and models are CC0 (Poly Haven / ambientCG) unless noted.
 - Poly Haven (CC0) models: metal_stool_02 (bar stools), hanging_industrial_lamp (bar pendants), potted_plant_01, fern_02
 - Wall art prints: crops of Poly Haven CC0 HDRI photos (alps_field, autumn_hill_view, aarfontein_sunrise)
 - Espresso machine: "Two group espresso machine" from 3dassets.dev, CC0 1.0 (contributor reports it was AI-generated, not scanned), meshopt-compressed
+
+## Realistic character pilot (`?realchar`, desktop only)
+- Sage body: "Body Female - Realistic" from Blender Studio **Human Base Meshes** bundle v1.4.1 — **CC0** (per blender.org demo-files page). Re-rigged (custom 17-bone skeleton, distance-based weights), recoloured and meshopt-compressed by Bot HQ. Hair cards, skin/eye shading are procedural (no third-party textures).
