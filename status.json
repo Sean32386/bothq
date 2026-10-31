@@ -1,0 +1,85 @@
+{
+ "updated": "2026-10-31T01:11:27-04:00",
+ "bots": [
+  {
+   "id": "merlin",
+   "name": "Merlin",
+   "station": "Command Tower",
+   "status": "working",
+   "task": "Routing today's tasks",
+   "updated": "2026-10-31T01:11:27-04:00"
+  },
+  {
+   "id": "jr",
+   "name": "Jr",
+   "station": "Chapel / Study",
+   "status": "idle",
+   "task": "Morning reflection ready",
+   "updated": "2026-10-31T01:11:27-04:00"
+  },
+  {
+   "id": "jocko",
+   "name": "Jocko",
+   "station": "Gym",
+   "status": "working",
+   "task": "Planning a workout",
+   "updated": "2026-10-31T01:11:27-04:00"
+  },
+  {
+   "id": "sage",
+   "name": "Sage",
+   "station": "Wellness Room",
+   "status": "idle",
+   "task": "Wellness check-in later",
+   "updated": "2026-10-31T01:11:27-04:00"
+  },
+  {
+   "id": "mick",
+   "name": "Mick",
+   "station": "Kitchen",
+   "status": "working",
+   "task": "Planning meals",
+   "updated": "2026-10-31T01:11:27-04:00"
+  },
+  {
+   "id": "shoppy",
+   "name": "Shoppy",
+   "station": "Grocery Store",
+   "status": "waiting",
+   "task": "Waiting on grocery list",
+   "updated": "2026-10-31T01:11:27-04:00"
+  },
+  {
+   "id": "scout",
+   "name": "Scout",
+   "station": "Lookout Tower",
+   "status": "working",
+   "task": "Researching opportunities",
+   "updated": "2026-10-31T01:11:27-04:00"
+  },
+  {
+   "id": "quill",
+   "name": "Quill",
+   "station": "Writing Desk",
+   "status": "waiting",
+   "task": "Draft awaiting review",
+   "updated": "2026-10-31T01:11:27-04:00"
+  },
+  {
+   "id": "ness",
+   "name": "Ness",
+   "station": "Stage",
+   "status": "idle",
+   "task": "Rehearsal scheduled",
+   "updated": "2026-10-31T01:11:27-04:00"
+  },
+  {
+   "id": "manny",
+   "name": "Manny",
+   "station": "Workshop",
+   "status": "working",
+   "task": "Building Bot HQ",
+   "updated": "2026-10-31T01:11:27-04:00"
+  }
+ ]
+}
