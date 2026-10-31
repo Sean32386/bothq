@@ -7,7 +7,7 @@ function px(g,map,pal,s){map.forEach((row,y)=>[...row].forEach((c,x)=>{if(c!=='.
 function hex(n){return n}
 function makeChar(sc,id){const m=BOTS_META[id];const g=sc.make.graphics({add:false});
  const skin=0xf1c27d,body=m.color,dark=0x222222;
- const pal={s:skin,b:body,d:dark,e:0x111111,h:0x5a3a1a,w:0xffffff,y:0xf2c230,k:0x8b5a2b,g:0x3fae5a,r:0xc0392b,p:0x6a4cff,l:0x9b7ad8};
+ const pal={s:skin,b:body,d:dark,e:0x111111,h:0x5a3a1a,w:0xffffff,y:0xf2c230,Y:0xffd60a,k:0x8b5a2b,g:0x3fae5a,r:0xc0392b,p:0x6a4cff,l:0x9b7ad8};
  let base=[
  '....hhhh....','...hhhhhh...','...ssssss...','...sesses...','...ssssss...','....ssss....',
  '..bbbbbbbb..','.sbbbbbbbbs.','.sbbbbbbbbs.','..bbbbbbbb..','..bbb..bbb..','..ddd..ddd..'];
@@ -15,7 +15,7 @@ function makeChar(sc,id){const m=BOTS_META[id];const g=sc.make.graphics({add:fal
  const over={
   merlin:['.....pp.....','....pppp....','...pyppyp...','..pppppppp..'], // wizard hat
   mick:['...wwwwww...','...wwwwww...','..wwwwwwww..'],
-  manny:['...yyyyyy...','..yyyyyyyy..'],
+  manny:['...YYYYYY...','..YYYYYYYY..'],
   jocko:['....dddd....','...dddddd...'],
   sage:['....gg......','...gggg.....'],
  };
