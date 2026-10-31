@@ -43,3 +43,7 @@ Modifications: converted USD→glTF, UVs rescaled, textures resized to 512/1024 
 - sofa_soft_b01
 - sofa_visitor_a01
 - storage_shelf_basic_a01
+
+## 2K PBR surface materials (CC0)
+- Poly Haven (CC0, https://polyhaven.com/license): herringbone_parquet (floor), concrete_wall_008 (walls), grey_plaster (upper walls), marble_01 (coffee bar top), poly_wool_herringbone (rugs)
+- ambientCG (CC0, https://ambientcg.com): Moss002 (plant walls)
