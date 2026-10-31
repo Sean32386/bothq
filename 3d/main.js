@@ -513,8 +513,8 @@ IDS.forEach((id,idx)=>{const m=BOTS_META[id];const[dx,dz,yaw]=DESK[id];
  bots[id]={id,decor,desk,deskY,bc,btex,side,mon,path:[],until:0,sayUntil:0,laughUntil:0,grp,el,scr,glow,arms,elbows,hips,knees,root,torso,cup,head,bubble,seat,lounge,bar,yaw,tgt:seat.clone(),spot:'seat',data:null,phase:Math.random()*6};});
 for(const id in bots)window.dress(bots[id],null);window.loadAvatars();
 // ?realchar pilot (desktop only): CC0 Blender Studio base mesh for Sage, bones driven by the procedural rig
-if(!MOBILE&&/[?&]realchar/.test(location.search)&&bots.sage){const b=bots.sage;GL.load('../assets/models/opt/realchar_sage.glb',g=>{
- const av=(window.__av&&window.__av.sage)||{},SK=new THREE.Color(av.skin||'#c98e6a'),OC=av.outfit||'#5b2a86',HC=(av.hair&&av.hair.color)||'#3b2417';
+if(!MOBILE&&/[?&]realchar/.test(location.search)){const RCB=(b,RID)=>{GL.load('../assets/models/opt/realchar_'+(RID==='sage'?'sage':'blazer')+'.glb',g=>{
+ const av=(window.__av&&window.__av[RID])||{},SK=new THREE.Color(av.skin||'#c98e6a'),OC=av.outfit||'#5b2a86',HC=av.hair_color||'#3b2417',HS=av.hair||'long';
  const m=g.scene,S=1.04,FLIP=new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0,1,0),Math.PI),tq=new THREE.Quaternion(),tv=new THREE.Vector3(),ts=new THREE.Vector3();sc.add(m);
  const place=()=>{b.grp.updateWorldMatrix(true,false);b.grp.matrixWorld.decompose(tv,tq,ts);m.quaternion.copy(tq).multiply(FLIP);m.scale.copy(ts).multiplyScalar(S);m.position.set(b.root.position.x,b.root.position.y-.92,b.root.position.z).applyMatrix4(b.grp.matrixWorld);m.updateMatrixWorld(true);};place();
  const Tm=(n,s)=>{const t=tx(n,s,[1,1]);t.flipY=false;t.wrapS=t.wrapT=THREE.ClampToEdgeWrapping;t.needsUpdate=true;return t;};
@@ -523,9 +523,9 @@ if(!MOBILE&&/[?&]realchar/.test(location.search)&&bots.sage){const b=bots.sage;G
  skinM.onBeforeCompile=sh=>{sh.fragmentShader=sh.fragmentShader.replace('#include <lights_fragment_end>','#include <lights_fragment_end>\n reflectedLight.indirectDiffuse+=diffuseColor.rgb*vec3(.10,.035,.02);');};
  const CL=(c,rep,o={})=>{const mm=PBR('linen',[rep,rep],Object.assign({color:c,normalScale:new THREE.Vector2(.9,.9)},o));mm.side=THREE.DoubleSide;return mm;};
  const blz=CL(OC,46,{sheen:.6,sheenColor:new THREE.Color(OC).offsetHSL(0,0,.2),sheenRoughness:.6});
- const mats={skin:skinM,blazer:blz,top:blz,shirt:CL(av.outfit2||'#f5f0e6',60),pants:CL(0x2a2a31,46),dress:blz,trim:CL(av.outfit2||'#f5f0e6',60,{sheen:.4}),shoes:new THREE.MeshPhysicalMaterial({color:0xf4f4f2,roughness:.45,clearcoat:.3,clearcoatRoughness:.4,side:THREE.DoubleSide}),sole:new THREE.MeshStandardMaterial({color:0xdedad4,roughness:.8}),gold:new THREE.MeshPhysicalMaterial({color:0xd4af37,metalness:1,roughness:.25}),eye:new THREE.MeshBasicMaterial({visible:false})};
+ const mats={skin:skinM,blazer:blz,top:blz,shirt:CL(av.outfit2||'#f5f0e6',60),pants:CL(0x2a2a31,46),dress:blz,trim:CL(av.outfit2||'#f5f0e6',60,{sheen:.4}),shoes:RID==='sage'?new THREE.MeshPhysicalMaterial({color:0xf4f4f2,roughness:.45,clearcoat:.3,clearcoatRoughness:.4,side:THREE.DoubleSide}):new THREE.MeshPhysicalMaterial({color:0x17151a,roughness:.28,clearcoat:.8,clearcoatRoughness:.15,side:THREE.DoubleSide}),sole:new THREE.MeshStandardMaterial({color:0xdedad4,roughness:.8}),gold:new THREE.MeshPhysicalMaterial({color:0xd4af37,metalness:1,roughness:.25}),eye:new THREE.MeshBasicMaterial({visible:false})};
  m.traverse(o=>{if(o.isMesh){o.castShadow=o.receiveShadow=true;o.frustumCulled=false;const n=(o.material&&o.material.name)||'';o.material=mats[n]||o.material;}});
- b.root.traverse(o=>{if(o.isMesh)o.visible=false;});window.__rc={m,grp:b.grp,b};
+ b.root.traverse(o=>{if(o.isMesh)o.visible=false;});(window.__rcs=window.__rcs||{})[RID]={m,grp:b.grp,b};if(RID==='sage')window.__rc=window.__rcs[RID];
  const B={};m.traverse(o=>{if(o.isBone){B[o.name]=o;B[o.name.replace(/([LR])$/,'.$1')]=o;}});m.updateWorldMatrix(true,true);
  const gq=new THREE.Quaternion(),q=new THREE.Quaternion(),pq=new THREE.Quaternion(),v=new THREE.Vector3(),w=new THREE.Vector3();b.grp.getWorldQuaternion(gq);const gqi=gq.clone().invert();
  const rest=n=>B[n].getWorldQuaternion(new THREE.Quaternion()).premultiply(gqi);
@@ -561,21 +561,21 @@ if(!MOBILE&&/[?&]realchar/.test(location.search)&&bots.sage){const b=bots.sage;G
   for(let k=0;k<2600;k++){const th=Math.acos(1-rnd()*1.25),ph=rnd()*6.283;let d=new THREE.Vector3(Math.sin(th)*Math.cos(ph),Math.cos(th),Math.sin(th)*Math.sin(ph));
    // skip face: front cone below hairline
    if(d.z>.3)continue;if(d.z>.05&&d.y<.9)continue;if(d.z>-.35&&d.y<.35)continue;if(d.z>-.1&&d.y<.1&&Math.abs(d.x)<.6)continue;
-   let p=new THREE.Vector3(C.x+d.x*Rd.x*1.0,C.y+d.y*Rd.y*1.0,C.z+d.z*Rd.z*1.0);const back=-d.z,Lh=(.30+.16*Math.max(0,back)+rnd()*.05),st=Lh/SEG;
+   let p=new THREE.Vector3(C.x+d.x*Rd.x*1.0,C.y+d.y*Rd.y*1.0,C.z+d.z*Rd.z*1.0);const back=-d.z,UP=HS==='bun'||HS==='ponytail'||HS==='sleek_ponytail',G=new THREE.Vector3(0,C.y+Rd.y*(HS==='bun'?.45:.15),C.z-Rd.z*1.02),Lh=UP?Math.max(.03,p.distanceTo(G)*1.05):(.30+.16*Math.max(0,back)+rnd()*.05),st=Lh/SEG;
    const n0=new THREE.Vector3(d.x/Rd.x,d.y/Rd.y,d.z/Rd.z).normalize();let dir=new THREE.Vector3(0,-1,-.25).addScaledVector(n0,-new THREE.Vector3(0,-1,-.25).dot(n0)).normalize();if(d.z>-.2){dir.set(Math.sign(d.x||(rnd()-.5))*1.0,-.15,-1.1).normalize();}if(d.y>.6)dir.lerp(n0,.2).normalize();const w=.0055+rnd()*.0045;
    for(let s=0;s<=SEG;s++){const n=new THREE.Vector3((p.x-C.x)/Rd.x,(p.y-C.y)/Rd.y,(p.z-C.z)/Rd.z).normalize();const side=new THREE.Vector3().crossVectors(dir,n).normalize().multiplyScalar(w*(1-.6*s/SEG));
     const tn=side.clone().normalize();if(!isFinite(tn.x)||tn.lengthSq()<.5)tn.set(1,0,0);for(const sg of[-1,1]){const q=p.clone().addScaledVector(side,sg);pos.push(q.x,q.y,q.z);uv.push(sg<0?0:1,s/SEG);tan.push(tn.x,tn.y,tn.z,1);}
     if(s<SEG){idx.push(vi,vi+1,vi+2,vi+1,vi+3,vi+2);}vi+=2;
-    dir.y-=.22;dir.normalize();p.addScaledVector(dir,st);
+    if(UP){const gd=G.clone().sub(p);if(gd.length()>1e-4)dir.lerp(gd.normalize(),.35).normalize();}else{dir.y-=.22;dir.normalize();}p.addScaledVector(dir,st);
     const r=E(p.x,p.y,p.z);if(r<1.04){const n2=new THREE.Vector3((p.x-C.x)/Rd.x/Rd.x,(p.y-C.y)/Rd.y/Rd.y,(p.z-C.z)/Rd.z/Rd.z).normalize();p.addScaledVector(n2,(1.04-r)*Math.min(Rd.x,Rd.z));}
     if(p.y<C.y-Rd.y*.85){p.z=Math.min(p.z,C.z-Rd.z*.55+Math.abs(p.x)*.15);if(p.y<C.y-Rd.y*1.15)p.x*=.985;}}}
   const hg=new THREE.BufferGeometry();hg.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));hg.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2));hg.setIndex(idx);hg.computeVertexNormals();hg.setAttribute('tangent',new THREE.Float32BufferAttribute(tan,4));
   const hm=new THREE.MeshPhysicalMaterial({color:HC,roughness:.38,metalness:0,alphaMap:HCARD,alphaTest:.4,side:THREE.DoubleSide,anisotropy:.85,anisotropyRotation:Math.PI/2,sheen:.35,sheenColor:new THREE.Color(HC).offsetHSL(.02,.05,.1),sheenRoughness:.4,specularIntensity:.35});
-  const hair=new THREE.Mesh(hg,hm);hair.castShadow=true;const hgp=new THREE.Group();hgp.add(hair);const cap=new THREE.Mesh(new THREE.SphereGeometry(1,40,24,0,6.283,0,1.22),new THREE.MeshStandardMaterial({color:HC,roughness:.6}));cap.scale.copy(Rd).multiplyScalar(1.045);cap.position.copy(C);hgp.add(cap);
-  hgp.position.copy(hp);const bm=new THREE.Matrix4().makeBasis(rgt,upv,fwd);hgp.quaternion.setFromRotationMatrix(bm);sc.add(hgp);hgp.updateMatrixWorld(true);hd.attach(hgp);if(/rcnohair/.test(location.search))hgp.visible=false;window.__hgp=hgp;window.__hair={n:pos.length/3,C,Rd};}
+  const hair=new THREE.Mesh(hg,hm);hair.castShadow=true;const hgp=new THREE.Group();hgp.add(hair);const cap=new THREE.Mesh(new THREE.SphereGeometry(1,40,24,0,6.283,0,1.22),new THREE.MeshStandardMaterial({color:HC,roughness:.6}));cap.scale.copy(Rd).multiplyScalar(1.045);cap.position.copy(C);hgp.add(cap);if(HS==='bun'||HS==='ponytail'||HS==='sleek_ponytail'){const G=new THREE.Vector3(0,C.y+Rd.y*(HS==='bun'?.45:.15),C.z-Rd.z*1.02),hm2=new THREE.MeshStandardMaterial({color:HC,map:HAIRT,bumpMap:HAIRT,bumpScale:1,roughness:.5});if(HS==='bun'){const bn=new THREE.Mesh(new THREE.SphereGeometry(.042,32,20),hm2);bn.scale.set(1,.9,.85);bn.position.copy(G).add(new THREE.Vector3(0,0,-.02));hgp.add(bn);}else{const L=.34,tl=new THREE.Mesh(new THREE.CylinderGeometry(.024,.008,L,20,8),hm2);tl.position.copy(G).add(new THREE.Vector3(0,-L/2+.01,-.035));tl.rotation.x=-.18;hgp.add(tl);const tie=new THREE.Mesh(new THREE.TorusGeometry(.022,.006,8,20),new THREE.MeshStandardMaterial({color:0x222222,roughness:.6}));tie.position.copy(G).add(new THREE.Vector3(0,-.005,-.03));tie.rotation.x=Math.PI/2;hgp.add(tie);}}
+  hgp.position.copy(hp);const bm=new THREE.Matrix4().makeBasis(rgt,upv,fwd);hgp.quaternion.setFromRotationMatrix(bm);sc.add(hgp);hgp.updateMatrixWorld(true);hd.attach(hgp);if(/rcnohair/.test(location.search))hgp.visible=false;if(RID==='sage')window.__hgp=hgp;window.__hair={n:pos.length/3,C,Rd};}
  b.rc=()=>{b.grp.traverse(o=>{if(o.isMesh&&o.visible)o.visible=false;});place();b.grp.getWorldQuaternion(gq);
   if(/rcnod/.test(location.search))return;for(const [p,bn,a,r] of map){p.getWorldQuaternion(q);q.premultiply(gqi.copy(gq).invert());q.multiply(a).multiply(r).premultiply(gq);bn.parent.getWorldQuaternion(pq);bn.quaternion.copy(pq.invert().multiply(q));bn.updateMatrixWorld(true);}};
-});}
+});};for(const RID of['sage','scout','quill','ness'])if(bots[RID])RCB(bots[RID],RID);}
 
 let hover=null;
 const ray=new THREE.Raycaster(),mv=new THREE.Vector2();if(/realchar/.test(location.search)){window.__ray=ray;window.__sc=sc;}let lastUser=-99,tourOn=true;const clk=new THREE.Clock();

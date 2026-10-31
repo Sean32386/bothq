@@ -9,6 +9,8 @@ async def main():
     d.on('pageerror',lambda e:E.append(str(e)[:200]))
     await d.goto(U);await d.evaluate("localStorage.setItem('bothq_ok',BOTHQ_CONFIG.passHash)")
     await d.goto(U+'?noauto&realchar'+__import__('os').environ.get('X','')+'&cam=-6,2,0,-8.7,1,-2');await d.wait_for_function("window.__rc",timeout=150000);await d.wait_for_timeout(15000)
+    RC=__import__('os').environ.get('RCID')
+    if RC:await d.wait_for_function("window.__rcs&&window.__rcs['"+RC+"']",timeout=150000);await d.evaluate("window.__rc=window.__rcs['"+RC+"']")
     for k,(dist,ang,dy) in VIEWS.items():
       if k=='seat':
         await d.evaluate("(()=>{const b=window.__rc.b;setInterval(()=>{b.path.length=0;b.grp.position.copy(b.seat);b.goal={pos:b.seat.clone(),pose:'sit',sit:.5,yaw:b.yaw,anim:'type'};},40)})()");await d.wait_for_timeout(4000)
