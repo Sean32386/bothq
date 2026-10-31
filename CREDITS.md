@@ -42,3 +42,5 @@ Other textures, HDRIs and models are CC0 (Poly Haven / ambientCG) unless noted.
 - Poly Haven (CC0, https://polyhaven.com/license): herringbone_parquet (floor), concrete_wall_008 (walls), grey_plaster (upper walls), marble_01 (coffee bar top), poly_wool_herringbone (rugs)
 - ambientCG (CC0, https://ambientcg.com): Moss002 (plant walls)
 - Poly Haven (CC0) models: metal_stool_02 (bar stools), hanging_industrial_lamp (bar pendants), potted_plant_01, fern_02
+- Wall art prints: crops of Poly Haven CC0 HDRI photos (alps_field, autumn_hill_view, aarfontein_sunrise)
+- Espresso machine: "Two group espresso machine" from 3dassets.dev, CC0 1.0 (contributor reports it was AI-generated, not scanned), meshopt-compressed

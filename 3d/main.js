@@ -128,9 +128,11 @@ box(9,1.05,1.1,WOODM,15.9,.52,13.6);box(9.2,.08,1.25,MARB,15.9,1.09,13.55);
 for(let i=0;i<10;i++)box(.82,.78,.03,WOODD,11.85+i*.9,.52,13.03);box(9,.08,.06,WOODD,15.9,.06,13.02);box(9,.05,.05,0xb08850,15.9,.98,13.02,{metalness:.9,roughness:.3});
 box(9,2.6,.3,WOODD,15.9,2.6,14.7);// back bar
 for(let i=0;i<10;i++)box(.18,.35,.18,[0x6a3a20,0x3a5a40,0x8a6a30,0x5a2a30][i%4],12.2+i*.8,2.6,14.5,{roughness:.15,metalness:.1});
-// espresso machine
+// espresso machine (procedural fallback on phones / ?noph)
+const ESPP=!MOBILE&&!/noph/.test(location.search);if(!ESPP){
 box(1.3,.8,.7,METAL,13,1.53,13.7);for(const gx of[12.6,13.4]){add(new THREE.CylinderGeometry(.05,.05,.12,16),METAL,gx,1.2,13.3);box(.05,.05,.3,0x1a1a1a,gx,1.2,13.15,{roughness:.6});}box(1.3,.08,.72,0x2a2624,13,1.97,13.7,{roughness:.6});box(.9,.12,.05,0x3a3430,13,1.75,13.34,{roughness:.6});add(new THREE.CircleGeometry(.03,10),new THREE.MeshBasicMaterial({color:0xffa24a}),12.7,1.75,13.31,sc,false).rotation.y=Math.PI;
 for(const dx of[-.3,.3]){box(.08,.2,.08,0x111,13+dx,1.25,13.3);}add(new THREE.SphereGeometry(.1,10,8),M(0xddddff,{metalness:1,roughness:.1}),13.45,1.75,13.33);
+}
 // display case w/ pastries
 const caseG=new THREE.MeshStandardMaterial({color:0xbfeaff,transparent:true,opacity:.15,roughness:0,depthWrite:false,envMapIntensity:1.5});
 add(new THREE.BoxGeometry(2.2,.6,.9),caseG,17.6,1.43,13.6,sc,false);neon(2.2,.03,.03,0xffd27a,17.6,1.72,13.18);
@@ -219,6 +221,7 @@ if(!MOBILE)GL.load('../assets/models/opt/potted_plant_04.glb',g=>{const src=g.sc
  gm('fern_02',m=>{const k=fit(m,1);PLQ.filter(p=>p[3]===1).forEach(([x,z,sz],i)=>put(m,x,.6*sz,z,i*2.3,k*.75*sz));});
  gm('metal_stool_02',m=>{const k=fit(m,.82);for(let i=0;i<5;i++)put(m,12.05+i*1.8,0,12.5,i*.7,k);});
  gm('hanging_industrial_lamp',m=>{const bb=new THREE.Box3().setFromObject(m),h=bb.max.y-bb.min.y,k=1.6/h;for(let i=0;i<4;i++){const x=12.6+i*2.3;put(m,x,7.2-bb.max.y*k,13.5,0,k);}});}
+if(ESPP)gm('espresso_2group',m=>put(m,13,1.13,13.75,0,1.4));
 // NVIDIA SimReady props (CC-BY-4.0, converted USD->glTF by us; see ../CREDITS.md). Desktop only, lazy/progressive: loaded one by one after first frames; phones keep the simple versions.
 if(!MOBILE&&!new URLSearchParams(location.search).has('nosr')){
  const SRL=new GLTFLoader().setMeshoptDecoder(MeshoptDecoder);const Q=[];let busy=0;
@@ -259,7 +262,7 @@ if(!MOBILE&&!new URLSearchParams(location.search).has('nosr')){
 // ---- wall art
 const art=(seed)=>ctex(320,220,(c,w,h)=>{const cs=[['#e8c9a0','#c07040','#5a6a40','#2a3a30'],['#d8b890','#a05a3a','#6a8a6a','#3a2a24'],['#f0d8b0','#8a6a4a','#4a6a5a','#c08850']][seed];c.fillStyle=cs[0];c.fillRect(0,0,w,h);c.fillStyle=cs[1];c.beginPath();c.arc(w*.68,h*.38,42,0,7);c.fill();
  c.fillStyle=cs[2];c.beginPath();c.moveTo(0,h);c.quadraticCurveTo(w*.3,h*.4,w*.6,h*.75);c.quadraticCurveTo(w*.8,h*.55,w,h*.7);c.lineTo(w,h);c.fill();c.fillStyle=cs[3];c.fillRect(0,h*.88,w,h*.12);});
-const pic=(x,y,z,ry,w,h,s)=>{const g=new THREE.Group();g.position.set(x,y,z);g.rotation.y=ry;sc.add(g);box(w+.12,h+.12,.05,0x3a2a1c,0,0,0,{roughness:.6},g);plane(w,h,new THREE.MeshStandardMaterial({map:art(s),roughness:.8}),0,0,.03,0,g);};
+const pic=(x,y,z,ry,w,h,s)=>{const g=new THREE.Group();g.position.set(x,y,z);g.rotation.y=ry;sc.add(g);box(w+.12,h+.12,.05,0x3a2a1c,0,0,0,{roughness:.6},g);let mp;if(!/noph/.test(location.search)){mp=tx('art'+s,1,[1,1]);mp.wrapS=mp.wrapT=THREE.ClampToEdgeWrapping;}else mp=art(s);plane(w,h,new THREE.MeshStandardMaterial({map:mp,roughness:.55}),0,0,.03,0,g);box(w+.02,.03,.01,0xf4f0e8,0,h/2,.026,{},g);};
 pic(-9.6,5.25,-14.78,0,1.7,1.05,0);pic(9.6,5.25,-14.78,0,1.7,1.05,1);pic(-12.45,2.4,-10.5,Math.PI/2,2.2,1.4,2);
 // ---- textured rugs
 const kilim=ctex(256,256,(c,w,h)=>{c.fillStyle='#8c6a52';c.fillRect(0,0,w,h);const cs=['#c8b49a','#4a3a30','#6a7060'];for(let y=0;y<h;y+=32){c.fillStyle=cs[(y/32)%3];c.fillRect(0,y+12,w,6);for(let x=0;x<w;x+=32){c.beginPath();c.moveTo(x+16,y+4);c.lineTo(x+28,y+16);c.lineTo(x+16,y+28);c.lineTo(x+4,y+16);c.fill();}}for(let i=0;i<4000;i++){c.fillStyle=`rgba(0,0,0,${RN()*.08})`;c.fillRect(RN()*w,RN()*h,1,2);}});
