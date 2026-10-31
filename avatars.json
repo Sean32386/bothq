@@ -114,23 +114,23 @@
   "motto": "Best deal or no deal."
  },
  "scout": {
-  "outfit_style": "explorer",
-  "outfit": "#a8875a",
-  "outfit2": "#5a4a30",
+  "outfit_style": "blazer",
+  "outfit": "#1f3a5f",
+  "outfit2": "#f4efe6",
   "skin": "#d6a07a",
-  "hair": "short",
-  "hair_color": "#6a4a2a",
-  "beard": "stubble",
-  "hat": "explorer",
-  "accessory": "binoculars",
-  "prop": "none",
-  "mug": "#2f7a6a",
+  "hair": "ponytail",
+  "hair_color": "#5a3825",
+  "beard": "none",
+  "hat": "none",
+  "accessory": "glasses",
+  "prop": "binoculars",
+  "mug": "#c9a227",
   "decor": [
    "globe",
    "map",
    "plant"
   ],
-  "motto": "Every opening is a trail worth checking."
+  "motto": "Every stone turned for the right role"
  },
  "quill": {
   "outfit_style": "sweater_vest",
