@@ -33,9 +33,37 @@ m=ob.modifiers.new('dec','DECIMATE');m.ratio=A.get('ratio',.14);bpy.ops.object.m
 bpy.ops.object.shade_smooth()
 zs=[v.co.z for v in me.vertices];z0=min(zs);H=max(zs)-z0
 print('faces',len(me.polygons),'H',H)
+zs=[v.co.z for v in me.vertices];z0=min(zs);H=max(zs)-z0
 # UVs
 bpy.ops.object.mode_set(mode='EDIT');bpy.ops.mesh.select_all(action='SELECT')
 bpy.ops.uv.smart_project(angle_limit=math.radians(66),island_margin=.004);bpy.ops.object.mode_set(mode='OBJECT')
+# give the head more texels: scale head UV islands up, then repack
+HB=A.get('headboost',2.5)
+if HB>1:
+  bm=bmesh.new();bm.from_mesh(me);uvl=bm.loops.layers.uv.active;bm.faces.ensure_lookup_table()
+  par=list(range(len(bm.faces)))
+  def fd(i):
+    while par[i]!=i:par[i]=par[par[i]];i=par[i]
+    return i
+  for e in bm.edges:
+    if len(e.link_faces)!=2:continue
+    f1,f2=e.link_faces;ok=True
+    for v in e.verts:
+      u1=[l[uvl].uv for l in f1.loops if l.vert==v][0];u2=[l[uvl].uv for l in f2.loops if l.vert==v][0]
+      if (u1-u2).length>1e-6:ok=False
+    if ok:par[fd(f1.index)]=fd(f2.index)
+  isl={}
+  for f in bm.faces:isl.setdefault(fd(f.index),[]).append(f)
+  nb=0
+  for fs in isl.values():
+    fz=sum(f.calc_center_median().z for f in fs)/len(fs)
+    if (fz-z0)/H>.84:
+      ls=[l for f in fs for l in f.loops];c=sum((l[uvl].uv for l in ls),Vector((0,0)))/len(ls)
+      for l in ls:l[uvl].uv=c+(l[uvl].uv-c)*HB
+      nb+=1
+  bm.to_mesh(me);bm.free();print('head islands boosted',nb)
+  bpy.ops.object.mode_set(mode='EDIT');bpy.ops.mesh.select_all(action='SELECT');bpy.ops.uv.select_all(action='SELECT')
+  bpy.ops.uv.pack_islands(rotate=True,margin=.003);bpy.ops.object.mode_set(mode='OBJECT')
 # projection material
 mat=bpy.data.materials.new('baked');mat.use_nodes=True;nt=mat.node_tree;N=nt.nodes;L=nt.links
 for n in list(N):N.remove(n)
@@ -54,6 +82,12 @@ def img(path,u,v):
   t=N.new('ShaderNodeTexImage');t.image=bpy.data.images.load(path);t.extension='EXTEND';t.interpolation='Cubic'
   c=N.new('ShaderNodeCombineXYZ');L.new(u,c.inputs[0]);L.new(v,c.inputs[1]);L.new(c.outputs[0],t.inputs[0]);return t.outputs[0]
 F=A['front'];S=A['side']
+_xs=[v.co.x for v in me.vertices];_zs=[v.co.z for v in me.vertices];_mx0,_mx1,_mz0,_mz1=min(_xs),max(_xs),min(_zs),max(_zs)
+if 'bbox' in F:
+  x0,y0,x1,y1=F['bbox'];F['kx']=(_mx1-_mx0)/(x1-x0);F['k']=(_mz1-_mz0)/(y1-y0);F['cx']=x0-_mx0/F['kx'];F['ztop']=_mz1;F['ytop']=y0
+if 'bbox' in S:
+  x0,y0,x1,y1=S['bbox'];S['k']=(_mz1-_mz0)/(y1-y0);S['ztop']=_mz1;S['ytop']=y0
+print('calib',F.get('kx'),F.get('k'),F.get('cx'))
 _sl=[v.co.y for v in me.vertices if abs(v.co.z-(z0+S['fit_f']*H))<.01 and abs(v.co.x)<.12]
 _y0,_y1=min(_sl),max(_sl);_a,_b=S['fit_px']   # image px back..front ; front is -y
 S['kx']=(_y1-_y0)/(_b-_a);S['cx']=_a+_y1/S['kx'];print('side fit',_y0,_y1,S['kx'],S['cx'])
@@ -69,7 +103,7 @@ cf=img(F['img'],fu,fv);cs=img(S['img'],su,sv);cb=img(F['blur'],fu,fv)
 def pw(x,p):return math_('POWER',math_('MAXIMUM',x,0.0),p)
 wf=pw(math_('MULTIPLY',sn.outputs[1],-1.0),A.get('pf',1.0))
 f_=math_('DIVIDE',math_('SUBTRACT',sx.outputs[2],z0),H)
-ws=math_('MULTIPLY',pw(math_('ABSOLUTE',sn.outputs[0]),A.get('ps',5.0)),1.0)
+ws=math_('MULTIPLY',pw(math_('ABSOLUTE',sn.outputs[0]),A.get('ps',5.0)),math_('LESS_THAN',math_('ABSOLUTE',sx.outputs[0]),A.get('sidex',9.0)*H))
 wb=pw(sn.outputs[1],2.0)
 # back colour: blurred front, but hair over head/upper back
 noise2=N.new('ShaderNodeTexNoise');noise2.inputs['Scale'].default_value=9;L.new(geo.outputs['Position'],noise2.inputs[0])
@@ -101,7 +135,24 @@ for n in list(N):N.remove(n)
 out=N.new('ShaderNodeOutputMaterial');bs=N.new('ShaderNodeBsdfPrincipled');L.new(bs.outputs[0],out.inputs[0])
 tn=N.new('ShaderNodeTexImage');tn.image=tex;L.new(tn.outputs[0],bs.inputs['Base Color']);bs.inputs['Roughness'].default_value=.75
 # ---- skeleton fitted to this mesh
-J=A['joints']   # image-front px for arm joints -> mesh xz; depth from local slice centre
+J=A['joints']
+if J=='auto':
+  VV=[v.co.copy() for v in me.vertices];Zf_=lambda f:z0+f*H
+  def sl(f,cond,r=.012):
+    p=[q for q in VV if abs(q.z-Zf_(f))<r*H and cond(q)];return p
+  J={}
+  # image px from mesh coords (inverse of P) so the rest of the code is unchanged
+  ipx=lambda q:[F['cx']+q.x/F['kx'],F['ytop']+(F['ztop']-q.z)/F['k']]
+  tor=sl(.80,lambda q:abs(q.x)<.2*H);hw=max(abs(q.x) for q in tor) if tor else .12*H
+  for S_,sg in (('L',1),('R',-1)):
+    sh=Vector((sg*min(.105*H,hw*.78),0,Zf_(.815)))
+    arm=[q for q in VV if sg*q.x>.15*H and Zf_(.30)<q.z<Zf_(.84)]
+    tip=max(arm,key=lambda q:(q-sh).length) if arm else sh+Vector((sg*.1*H,0,-.42*H))
+    el=sh.lerp(tip,.42);wr=sh.lerp(tip,.80)
+    legp=lambda f:(lambda p:Vector((sum(q.x for q in p)/len(p),0,Zf_(f))))(sl(f,lambda q:sg*q.x>0.01*H and abs(q.x)<.2*H))
+    hp=Vector((sg*.055*H,0,Zf_(.52)));kn=legp(.285);an=legp(.05)
+    J[S_]={'arm':[ipx(sh),ipx(el),ipx(wr),ipx(tip)],'leg':[ipx(hp),ipx(kn),ipx(an)]}
+  print('joints',J)   # image-front px for arm joints -> mesh xz; depth from local slice centre
 V=[v.co.copy() for v in me.vertices]
 def depth(x,z,r=.04):
   ys=[p.y for p in V if abs(p.x-x)<r and abs(p.z-z)<r];return sum(ys)/len(ys) if ys else 0

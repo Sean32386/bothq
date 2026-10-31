@@ -514,7 +514,7 @@ IDS.forEach((id,idx)=>{const m=BOTS_META[id];const[dx,dz,yaw]=DESK[id];
 for(const id in bots)window.dress(bots[id],null);window.loadAvatars();
 // ?realchar2 (desktop only): Sage from her refsheet via image-to-3D shape + our projected texture, same bone driving
 // ?realchar pilot (desktop only): CC0 Blender Studio base mesh for Sage, bones driven by the procedural rig
-if(!MOBILE&&/[?&]realchar/.test(location.search)){const RCB=(b,RID)=>{const LEAN=RID==='sage'&&/[?&]realchar2/.test(location.search);GL.load('../assets/models/opt/'+(LEAN?'realchar2_sage':'realchar_'+(RID==='sage'?'sage':'blazer'))+'.glb',g=>{
+if(!MOBILE&&/[?&]realchar/.test(location.search)){const RC2L=['sage'],RC2=/[?&]realchar2/.test(location.search);const RCB=(b,RID)=>{const LEAN=RC2&&RC2L.includes(RID);GL.load('../assets/models/opt/'+(LEAN?'realchar2_'+RID:'realchar_'+(RID==='sage'?'sage':'blazer'))+'.glb',g=>{
  const av=(window.__av&&window.__av[RID])||{},SK=new THREE.Color(av.skin||'#c98e6a'),OC=av.outfit||'#5b2a86',HC=av.hair_color||'#3b2417',HS=av.hair||'long';
  const m=g.scene,S=1.04,FLIP=new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0,1,0),Math.PI),tq=new THREE.Quaternion(),tv=new THREE.Vector3(),ts=new THREE.Vector3();sc.add(m);
  const place=()=>{b.grp.updateWorldMatrix(true,false);b.grp.matrixWorld.decompose(tv,tq,ts);m.quaternion.copy(tq).multiply(FLIP);m.scale.copy(ts).multiplyScalar(S);m.position.set(b.root.position.x,b.root.position.y-.92,b.root.position.z).applyMatrix4(b.grp.matrixWorld);m.updateMatrixWorld(true);};place();
@@ -576,7 +576,7 @@ if(!MOBILE&&/[?&]realchar/.test(location.search)){const RCB=(b,RID)=>{const LEAN
   hgp.position.copy(hp);const bm=new THREE.Matrix4().makeBasis(rgt,upv,fwd);hgp.quaternion.setFromRotationMatrix(bm);sc.add(hgp);hgp.updateMatrixWorld(true);hd.attach(hgp);if(/rcnohair/.test(location.search))hgp.visible=false;if(RID==='sage')window.__hgp=hgp;window.__hair={n:pos.length/3,C,Rd};}
  b.rc=()=>{b.grp.traverse(o=>{if(o.isMesh&&o.visible)o.visible=false;});place();b.grp.getWorldQuaternion(gq);
   if(/rcnod/.test(location.search))return;for(const [p,bn,a,r] of map){p.getWorldQuaternion(q);q.premultiply(gqi.copy(gq).invert());q.multiply(a).multiply(r).premultiply(gq);bn.parent.getWorldQuaternion(pq);bn.quaternion.copy(pq.invert().multiply(q));bn.updateMatrixWorld(true);}};
-});};for(const RID of['sage','scout','quill','ness'])if(bots[RID])RCB(bots[RID],RID);}
+});};for(const RID of(RC2?RC2L:['sage','scout','quill','ness']))if(bots[RID])RCB(bots[RID],RID);}
 
 let hover=null;
 const ray=new THREE.Raycaster(),mv=new THREE.Vector2();if(/realchar/.test(location.search)){window.__ray=ray;window.__sc=sc;}let lastUser=-99,tourOn=true;const clk=new THREE.Clock();
