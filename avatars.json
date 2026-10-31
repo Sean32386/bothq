@@ -202,22 +202,27 @@
   "motto": "If it can be built, I'm building it."
  },
  "pixel": {
-  "outfit_style": "tee",
-  "outfit": "#6b7280",
-  "outfit2": "#d1d5db",
-  "skin": "#d9a77f",
+  "outfit_style": "cardigan",
+  "outfit": "#1fb5a8",
+  "outfit2": "#e84393",
+  "skin": "#e0ac88",
   "hair": "short",
-  "hair_color": "#3a2a20",
+  "hair_color": "#2a2018",
   "beard": "none",
-  "hat": "none",
-  "accessory": "none",
-  "prop": "none",
-  "mug": "#9ca3af",
+  "hat": "beanie",
+  "accessory": "headset",
+  "prop": "notebook",
+  "mug": "#ffc93c",
   "decor": [
-   "plant"
+   "headphones",
+   "plant",
+   "photo"
   ],
-  "motto": "",
+  "motto": "Make it beautiful, make it true.",
   "build": "average",
-  "expression": "calm"
+  "expression": "smile",
+  "eye_color": "#5a3a22",
+  "face": "masc",
+  "patch": "star"
  }
 }
