@@ -1,5 +1,5 @@
 # Blender 4.2 CLI: build realistic Sage pilot from Blender Studio Human Base Meshes (CC0)
-import bpy,bmesh,math,sys
+import os,bpy,bmesh,math,sys
 from mathutils import Vector
 F='/tmp/hbm/human-base-meshes-bundle-v1.4.1/human_base_meshes_bundle.blend'
 OUT=sys.argv[sys.argv.index('--')+1]
@@ -118,6 +118,6 @@ for e in eyes:
   import mathutils;cs=[e.matrix_world@v.co for v in e.data.vertices];print("EYE",e.name,e.parent and e.parent.name,[m.type for m in e.modifiers],min(c.z for c in cs),max(c.z for c in cs),min(c.x for c in cs),max(c.x for c in cs),e.matrix_world.to_scale())
 import bake,clothes
 bake.bake(body)
-clothes.build(body,ao,z0,H)
+(clothes.build_dress if os.environ.get("OUTFIT","dress")=="dress" else clothes.build)(body,ao,z0,H)
 bpy.ops.export_scene.gltf(filepath=OUT,export_format='GLB',export_skins=True,export_animations=False,export_apply=False,export_yup=True,use_selection=False,export_normals=True,export_tangents=False)
 print('EXPORTED',OUT)

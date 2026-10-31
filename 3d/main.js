@@ -521,7 +521,7 @@ if(!MOBILE&&/[?&]realchar/.test(location.search)&&bots.sage){const b=bots.sage;G
  skinM.onBeforeCompile=sh=>{sh.fragmentShader=sh.fragmentShader.replace('#include <lights_fragment_end>','#include <lights_fragment_end>\n reflectedLight.indirectDiffuse+=diffuseColor.rgb*vec3(.10,.035,.02);');};
  const CL=(c,rep,o={})=>{const mm=PBR('linen',[rep,rep],Object.assign({color:c,normalScale:new THREE.Vector2(.9,.9)},o));mm.side=THREE.DoubleSide;return mm;};
  const blz=CL(OC,46,{sheen:.6,sheenColor:new THREE.Color(OC).offsetHSL(0,0,.2),sheenRoughness:.6});
- const mats={skin:skinM,blazer:blz,top:blz,shirt:CL(av.outfit2||'#f5f0e6',60),pants:CL(0x2a2a31,46),shoes:new THREE.MeshPhysicalMaterial({color:0x17151a,roughness:.28,clearcoat:.8,clearcoatRoughness:.15,side:THREE.DoubleSide}),eye:new THREE.MeshBasicMaterial({visible:false})};
+ const mats={skin:skinM,blazer:blz,top:blz,shirt:CL(av.outfit2||'#f5f0e6',60),pants:CL(0x2a2a31,46),dress:blz,trim:CL(av.outfit2||'#f5f0e6',60,{sheen:.4}),shoes:new THREE.MeshPhysicalMaterial({color:0xf4f4f2,roughness:.45,clearcoat:.3,clearcoatRoughness:.4,side:THREE.DoubleSide}),sole:new THREE.MeshStandardMaterial({color:0xdedad4,roughness:.8}),gold:new THREE.MeshPhysicalMaterial({color:0xd4af37,metalness:1,roughness:.25}),eye:new THREE.MeshBasicMaterial({visible:false})};
  m.traverse(o=>{if(o.isMesh){o.castShadow=o.receiveShadow=true;o.frustumCulled=false;const n=(o.material&&o.material.name)||'';o.material=mats[n]||o.material;}});
  b.root.traverse(o=>{if(o.isMesh)o.visible=false;});window.__rc={m,grp:b.grp,b};
  const B={};m.traverse(o=>{if(o.isBone){B[o.name]=o;B[o.name.replace(/([LR])$/,'.$1')]=o;}});m.updateWorldMatrix(true,true);
