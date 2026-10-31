@@ -20,10 +20,10 @@
  },
  "jr": {
   "outfit_style": "blazer",
-  "outfit": "#24324e",
-  "outfit2": "#f2efe8",
+  "outfit": "#1f2a44",
+  "outfit2": "#c9a227",
   "skin": "#e2b08c",
-  "hair": "short",
+  "hair": "side_part",
   "hair_color": "#8a8580",
   "beard": "stubble",
   "hat": "none",
@@ -32,10 +32,10 @@
   "mug": "#7a1f1f",
   "decor": [
    "candle",
-   "photo",
-   "plant"
+   "books",
+   "photo"
   ],
-  "motto": "Grace for today, purpose for tomorrow."
+  "motto": "As for me and my house, we will serve the LORD. Josh 24:15"
  },
  "jocko": {
   "outfit_style": "tee",
