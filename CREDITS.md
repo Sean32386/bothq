@@ -52,3 +52,9 @@ Other textures, HDRIs and models are CC0 (Poly Haven / ambientCG) unless noted.
 - Skin albedo/roughness/normal maps (`assets/tex/skin_*.webp`): procedurally generated and baked in Blender (noise/voronoi), no third-party textures.
 - Figure shaping (hourglass silhouette), modelled blazer/shirt/trousers/shoe shells: authored for Bot HQ in Blender on top of the CC0 Human Base Meshes body.
 - Eyes (iris canvas texture, cornea) and strand hair: generated in code at runtime.
+
+## Art by Pixel (Bot HQ's graphics & visual design artist)
+Original AI-generated artwork made by Pixel for Bot HQ; license: `art/textures/LICENSE.md` (original work, free to use, modify and publish in Bot HQ; no third-party material, logos or real-person likenesses).
+- Wall posters (`assets/tex/artp_*.webp`): "As for me and my house, we will serve the LORD" (Joshua 24:15), "Family First", "Teamwork - Together We Build". The faith poster is cropped to its framed artwork; the other two are used full-bleed.
+- Character art direction and reference sheets for every bot (`art/<bot>/art_direction.md`, `refsheet.png`). Sage's realistic wrap dress and white sneakers are modelled from Pixel's `art/sage/refsheet.png`.
+- Pixel's own look (pixie-fairy elf artist: elf ears, iridescent wings, beret) follows her art direction.
