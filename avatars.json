@@ -133,23 +133,23 @@
   "motto": "Every stone turned for the right role"
  },
  "quill": {
-  "outfit_style": "sweater_vest",
-  "outfit": "#7a3a3a",
-  "outfit2": "#e8e2d6",
+  "outfit_style": "blazer",
+  "outfit": "#1f2a44",
+  "outfit2": "#f4efe6",
   "skin": "#ecc2a0",
-  "hair": "side_part",
-  "hair_color": "#2a1e16",
+  "hair": "bun",
+  "hair_color": "#4a2c1d",
   "beard": "none",
   "hat": "none",
   "accessory": "glasses",
   "prop": "quill",
-  "mug": "#f2f0ea",
+  "mug": "#b08d57",
   "decor": [
    "books",
-   "candle",
-   "photo"
+   "plant",
+   "trophy"
   ],
-  "motto": "Every word earns its place."
+  "motto": "Every line true. Every role earned."
  },
  "ness": {
   "outfit_style": "cardigan",
