@@ -47,3 +47,8 @@ Other textures, HDRIs and models are CC0 (Poly Haven / ambientCG) unless noted.
 
 ## Realistic character pilot (`?realchar`, desktop only)
 - Sage body: "Body Female - Realistic" from Blender Studio **Human Base Meshes** bundle v1.4.1 — **CC0** (per blender.org demo-files page). Re-rigged (custom 17-bone skeleton, distance-based weights), recoloured and meshopt-compressed by Bot HQ. Hair cards, skin/eye shading are procedural (no third-party textures).
+
+### Sage realistic pilot (round 4, `?realchar`)
+- Skin albedo/roughness/normal maps (`assets/tex/skin_*.webp`): procedurally generated and baked in Blender (noise/voronoi), no third-party textures.
+- Figure shaping (hourglass silhouette), modelled blazer/shirt/trousers/shoe shells: authored for Bot HQ in Blender on top of the CC0 Human Base Meshes body.
+- Eyes (iris canvas texture, cornea) and strand hair: generated in code at runtime.
