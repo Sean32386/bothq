@@ -59,7 +59,7 @@ const BOTN=MOBILE?null:tx('metal_nor',0,[1,1]),BOTR=MOBILE?null:tx('metal_rough'
 CONC.userData.tile=2.4;WOODM.userData.tile=1.2;WOODD.userData.tile=1.2;const MARB=PBR('marb',[1,1],{color:0xf2ece4,env:1.0});MARB.userData.tile=1.6;const PLAS=PBR('plas',[1,1],{color:0xd8cfc4,env:.5});PLAS.userData.tile=3;
 const FC={};const FAB=c=>FC[c]||(FC[c]=PBR('linen',[2,2],{color:c,normalScale:new THREE.Vector2(1.2,1.2)}));const TERRA=PBR('clay',[1,1],{color:0xd08060});const METAL=PBR('metal',[.5,.5],{color:0x8a8a90,metalness:.85,env:1.1});const LEATH=PBR('leather',[1,1],{color:0x9a6a48});const LINEN=c=>PBR('linen',[1.5,1.5],{color:c});
 const ft0=ctex(256,256,(g)=>{g.fillStyle='#10111a';g.fillRect(0,0,256,256);g.strokeStyle='#22e6ff22';g.lineWidth=2;for(let i=0;i<=256;i+=64){g.beginPath();g.moveTo(i,0);g.lineTo(i,256);g.moveTo(0,i);g.lineTo(256,i);g.stroke();}});
-const FLOORM=PBR('parq',[40,28],{color:0xa49a92,env:.9});FLOORM.normalScale=new THREE.Vector2(.8,.8);add(new THREE.PlaneGeometry(42,30),FLOORM,0,0,0).rotation.x=-Math.PI/2;
+const FLOORM=PBR('parq',[40,28],{color:0x9c9894,env:.45});FLOORM.normalScale=new THREE.Vector2(.8,.8);add(new THREE.PlaneGeometry(42,30),FLOORM,0,0,0).rotation.x=-Math.PI/2;
 // skyline
 const sky=ctex(1024,320,(g,w,h)=>{const gr=g.createLinearGradient(0,0,0,h);gr.addColorStop(0,'#2a2438');gr.addColorStop(.55,'#6a4a52');gr.addColorStop(1,'#d08a5a');g.fillStyle=gr;g.fillRect(0,0,w,h);
  let rnd=7;const R=()=>(rnd=(rnd*16807)%2147483647)/2147483647;
