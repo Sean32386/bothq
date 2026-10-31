@@ -512,8 +512,9 @@ IDS.forEach((id,idx)=>{const m=BOTS_META[id];const[dx,dz,yaw]=DESK[id];
  const side=new THREE.Vector3(1.2,0,.45);desk.localToWorld(side);if(id==='merlin')side.set(2.2,0,-9.4);const mon=new THREE.Vector3(0,1.4,-.3+off);desk.localToWorld(mon);
  bots[id]={id,decor,desk,deskY,bc,btex,side,mon,path:[],until:0,sayUntil:0,laughUntil:0,grp,el,scr,glow,arms,elbows,hips,knees,root,torso,cup,head,bubble,seat,lounge,bar,yaw,tgt:seat.clone(),spot:'seat',data:null,phase:Math.random()*6};});
 for(const id in bots)window.dress(bots[id],null);window.loadAvatars();
+// ?realchar2 (desktop only): Sage from her refsheet via image-to-3D shape + our projected texture, same bone driving
 // ?realchar pilot (desktop only): CC0 Blender Studio base mesh for Sage, bones driven by the procedural rig
-if(!MOBILE&&/[?&]realchar/.test(location.search)){const RCB=(b,RID)=>{GL.load('../assets/models/opt/realchar_'+(RID==='sage'?'sage':'blazer')+'.glb',g=>{
+if(!MOBILE&&/[?&]realchar/.test(location.search)){const RCB=(b,RID)=>{const LEAN=RID==='sage'&&/[?&]realchar2/.test(location.search);GL.load('../assets/models/opt/'+(LEAN?'realchar2_sage':'realchar_'+(RID==='sage'?'sage':'blazer'))+'.glb',g=>{
  const av=(window.__av&&window.__av[RID])||{},SK=new THREE.Color(av.skin||'#c98e6a'),OC=av.outfit||'#5b2a86',HC=av.hair_color||'#3b2417',HS=av.hair||'long';
  const m=g.scene,S=1.04,FLIP=new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0,1,0),Math.PI),tq=new THREE.Quaternion(),tv=new THREE.Vector3(),ts=new THREE.Vector3();sc.add(m);
  const place=()=>{b.grp.updateWorldMatrix(true,false);b.grp.matrixWorld.decompose(tv,tq,ts);m.quaternion.copy(tq).multiply(FLIP);m.scale.copy(ts).multiplyScalar(S);m.position.set(b.root.position.x,b.root.position.y-.92,b.root.position.z).applyMatrix4(b.grp.matrixWorld);m.updateMatrixWorld(true);};place();
@@ -524,7 +525,7 @@ if(!MOBILE&&/[?&]realchar/.test(location.search)){const RCB=(b,RID)=>{GL.load('.
  const CL=(c,rep,o={})=>{const mm=PBR('linen',[rep,rep],Object.assign({color:c,normalScale:new THREE.Vector2(.9,.9)},o));mm.side=THREE.DoubleSide;return mm;};
  const blz=CL(OC,46,{sheen:.6,sheenColor:new THREE.Color(OC).offsetHSL(0,0,.2),sheenRoughness:.6});
  const mats={skin:skinM,blazer:blz,top:blz,shirt:CL(av.outfit2||'#f5f0e6',60),pants:CL(0x2a2a31,46),dress:blz,trim:CL(av.outfit2||'#f5f0e6',60,{sheen:.4}),shoes:RID==='sage'?new THREE.MeshPhysicalMaterial({color:0xf4f4f2,roughness:.45,clearcoat:.3,clearcoatRoughness:.4,side:THREE.DoubleSide}):new THREE.MeshPhysicalMaterial({color:0x17151a,roughness:.28,clearcoat:.8,clearcoatRoughness:.15,side:THREE.DoubleSide}),sole:new THREE.MeshStandardMaterial({color:0xdedad4,roughness:.8}),gold:new THREE.MeshPhysicalMaterial({color:0xd4af37,metalness:1,roughness:.25}),eye:new THREE.MeshBasicMaterial({visible:false})};
- m.traverse(o=>{if(o.isMesh){o.castShadow=o.receiveShadow=true;o.frustumCulled=false;const n=(o.material&&o.material.name)||'';o.material=mats[n]||o.material;}});
+ m.traverse(o=>{if(o.isMesh){o.castShadow=o.receiveShadow=true;o.frustumCulled=false;const n=(o.material&&o.material.name)||'';o.material=mats[n]||o.material;if(LEAN&&o.material.map){o.material.roughness=.8;o.material.metalness=0;o.material.map.anisotropy=8;}}});
  b.root.traverse(o=>{if(o.isMesh)o.visible=false;});(window.__rcs=window.__rcs||{})[RID]={m,grp:b.grp,b};if(RID==='sage')window.__rc=window.__rcs[RID];
  const B={};m.traverse(o=>{if(o.isBone){B[o.name]=o;B[o.name.replace(/([LR])$/,'.$1')]=o;}});m.updateWorldMatrix(true,true);
  const gq=new THREE.Quaternion(),q=new THREE.Quaternion(),pq=new THREE.Quaternion(),v=new THREE.Vector3(),w=new THREE.Vector3();b.grp.getWorldQuaternion(gq);const gqi=gq.clone().invert();
@@ -552,7 +553,7 @@ if(!MOBILE&&/[?&]realchar/.test(location.search)){const RCB=(b,RID)=>{GL.load('.
    const co=new THREE.Mesh(new THREE.SphereGeometry(rr*.6,32,16,0,6.283,0,1.1),corM);co.rotation.x=Math.PI/2;co.position.z=rr*.62;eg.add(co);
    sc.add(eg);eg.updateMatrixWorld(true);hd.attach(eg);if(/rcnoeyes/.test(location.search))eg.visible=false;}}
  // ---- hair: ~1400 strand ribbons grown over a fitted scalp ellipsoid, falling with gravity, long style; anisotropic sheen
- {const bodyO=[];m.traverse(o=>{if(o.isSkinnedMesh&&o.material===skinM)bodyO.push(o);});const hp=hd.getWorldPosition(new THREE.Vector3()),pts=[],e=new THREE.Vector3();
+ if(!LEAN){const bodyO=[];m.traverse(o=>{if(o.isSkinnedMesh&&o.material===skinM)bodyO.push(o);});const hp=hd.getWorldPosition(new THREE.Vector3()),pts=[],e=new THREE.Vector3();
   for(const o of bodyO){const p=o.geometry.attributes.position;o.updateMatrixWorld(true);for(let i=0;i<p.count;i+=3){e.fromBufferAttribute(p,i);o.applyBoneTransform(i,e);e.applyMatrix4(o.matrixWorld);if(e.y>hp.y+.02&&e.distanceTo(hp)<.3)pts.push(e.clone());}}
   const toL=q=>{const d=q.clone().sub(hp);return new THREE.Vector3(d.dot(rgt),d.dot(upv),d.dot(fwd));};
   const Lp=pts.map(toL),bx=new THREE.Box3().setFromPoints(Lp),C=bx.getCenter(new THREE.Vector3()),Rd=bx.getSize(new THREE.Vector3()).multiplyScalar(.5);C.y=bx.max.y-Rd.y*1.0;Rd.y=Rd.y;
