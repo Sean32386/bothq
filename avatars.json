@@ -38,7 +38,7 @@
   "motto": "As for me and my house, we will serve the LORD. Josh 24:15"
  },
  "jocko": {
-  "outfit_style": "tee",
+  "outfit_style": "tactical",
   "outfit": "#3b4a2f",
   "outfit2": "#1f1f1f",
   "skin": "#d9a37e",
@@ -46,7 +46,7 @@
   "hair_color": "#6a5a4c",
   "beard": "full",
   "hat": "cap",
-  "accessory": "cross_pin",
+  "accessory": "plate_carrier",
   "prop": "dumbbell",
   "mug": "#111111",
   "decor": [
@@ -54,7 +54,11 @@
    "trophy",
    "pennant"
   ],
-  "motto": "Discipline equals freedom. Stay hard."
+  "motto": "Discipline equals freedom. Stay hard.",
+  "build": "buff",
+  "patch": "cross",
+  "expression": "stern",
+  "face": "masc"
  },
  "sage": {
   "outfit_style": "blazer",
@@ -73,7 +77,9 @@
    "candle",
    "herbs"
   ],
-  "motto": "Rest well, rise strong, live long."
+  "motto": "Rest well, rise strong, live long.",
+  "face": "fem",
+  "build": "athletic"
  },
  "mick": {
   "outfit_style": "hoodie",
@@ -130,7 +136,9 @@
    "map",
    "plant"
   ],
-  "motto": "Every stone turned for the right role"
+  "motto": "Every stone turned for the right role",
+  "face": "fem",
+  "build": "slim"
  },
  "quill": {
   "outfit_style": "blazer",
@@ -149,7 +157,9 @@
    "plant",
    "trophy"
   ],
-  "motto": "Every line true. Every role earned."
+  "motto": "Every line true. Every role earned.",
+  "face": "fem",
+  "build": "slim"
  },
  "ness": {
   "outfit_style": "blazer",
@@ -168,7 +178,9 @@
    "plant",
    "trophy"
   ],
-  "motto": "Warm first, then bold. Say it in 30 seconds."
+  "motto": "Warm first, then bold. Say it in 30 seconds.",
+  "face": "fem",
+  "build": "slim"
  },
  "manny": {
   "outfit_style": "work_vest",

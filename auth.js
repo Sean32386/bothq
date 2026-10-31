@@ -18,9 +18,9 @@ window.BOTS_META={
  jr:{name:'Jr',role:'Faith & study companion',station:'Chapel / Study',color:0xf2e6c9},
  jocko:{name:'Jocko',role:'Discipline & training coach',station:'Gym',color:0x111111},
  sage:{name:'Sage',role:'Wellness & mindfulness',station:'Wellness Room',color:0x3fae5a},
- mick:{name:'Mick',role:'Chef & meal planner',station:'Kitchen',color:0xffffff},
+ mick:{name:'Mick',role:'Trainer & dietitian',station:'Gym & Kitchen',color:0xffffff},
  shoppy:{name:'Shoppy',role:'Groceries & shopping',station:'Grocery Store',color:0xff8a3d},
  scout:{name:'Scout',role:'Career & research lookout',station:'Lookout Tower',color:0x7a5a2f},
  quill:{name:'Quill',role:'Writer & editor',station:'Writing Desk',color:0x2f6fd6},
- ness:{name:'Ness',role:'Presenter & performer',station:'Stage',color:0xe0409a},
+ ness:{name:'Ness',role:'Communication & executive-presence coach',station:'Speaking Studio',color:0xe0409a},
  manny:{name:'Manny',role:'Builder – apps, XR, robots',station:'Workshop',color:0xf2c230}};

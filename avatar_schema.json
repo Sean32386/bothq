@@ -1,15 +1,126 @@
 {
-  "colors": ["outfit", "outfit2", "skin", "hair_color", "mug"],
-  "color_format": "#rrggbb",
-  "enums": {
-    "hair": ["bald", "buzz", "short", "side_part", "curly", "long", "ponytail", "bun"],
-    "beard": ["none", "stubble", "full", "goatee", "wizard"],
-    "outfit_style": ["robe", "blazer", "tee", "athleisure", "chef_coat", "cardigan", "explorer", "sweater_vest", "work_vest", "hoodie"],
-    "hat": ["none", "wizard", "chef", "hard_hat", "explorer", "cap", "beanie", "headband", "crown"],
-    "accessory": ["none", "glasses", "safety_glasses", "headset", "binoculars", "tie", "scarf", "tool_belt", "leaf_pin", "cross_pin"],
-    "prop": ["none", "staff", "bible", "water_bottle", "shopping_bags", "binoculars", "quill", "wrench", "spatula", "notebook", "coffee", "dumbbell"]
-  },
-  "decor_items": ["plant", "books", "candle", "trophy", "photo", "globe", "dumbbell", "cactus", "crystal_ball", "herbs", "map", "toolbox", "pennant", "headphones"],
-  "decor_max": 3,
-  "motto_max": 60
+ "colors": [
+  "outfit",
+  "outfit2",
+  "skin",
+  "hair_color",
+  "mug",
+  "eye_color"
+ ],
+ "color_format": "#rrggbb",
+ "enums": {
+  "build": [
+   "slim",
+   "average",
+   "athletic",
+   "buff"
+  ],
+  "face": [
+   "masc",
+   "fem"
+  ],
+  "expression": [
+   "smile",
+   "warm",
+   "calm",
+   "stern"
+  ],
+  "hair": [
+   "bald",
+   "buzz",
+   "high_tight",
+   "short",
+   "side_part",
+   "curly",
+   "long",
+   "long_waves",
+   "bob",
+   "ponytail",
+   "sleek_ponytail",
+   "bun"
+  ],
+  "beard": [
+   "none",
+   "stubble",
+   "full",
+   "goatee",
+   "wizard"
+  ],
+  "outfit_style": [
+   "robe",
+   "blazer",
+   "tee",
+   "athleisure",
+   "chef_coat",
+   "cardigan",
+   "explorer",
+   "sweater_vest",
+   "work_vest",
+   "hoodie",
+   "tactical"
+  ],
+  "hat": [
+   "none",
+   "wizard",
+   "chef",
+   "hard_hat",
+   "explorer",
+   "cap",
+   "beanie",
+   "headband",
+   "crown"
+  ],
+  "accessory": [
+   "none",
+   "glasses",
+   "safety_glasses",
+   "headset",
+   "binoculars",
+   "tie",
+   "scarf",
+   "tool_belt",
+   "leaf_pin",
+   "cross_pin",
+   "plate_carrier",
+   "watch"
+  ],
+  "prop": [
+   "none",
+   "staff",
+   "bible",
+   "water_bottle",
+   "shopping_bags",
+   "binoculars",
+   "quill",
+   "wrench",
+   "spatula",
+   "notebook",
+   "coffee",
+   "dumbbell"
+  ],
+  "patch": [
+   "none",
+   "cross",
+   "flag",
+   "star"
+  ]
+ },
+ "decor_items": [
+  "plant",
+  "books",
+  "candle",
+  "trophy",
+  "photo",
+  "globe",
+  "dumbbell",
+  "cactus",
+  "crystal_ball",
+  "herbs",
+  "map",
+  "toolbox",
+  "pennant",
+  "headphones"
+ ],
+ "decor_max": 3,
+ "motto_max": 60
 }
