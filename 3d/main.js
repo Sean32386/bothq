@@ -264,6 +264,8 @@ const art=(seed)=>ctex(320,220,(c,w,h)=>{const cs=[['#e8c9a0','#c07040','#5a6a40
  c.fillStyle=cs[2];c.beginPath();c.moveTo(0,h);c.quadraticCurveTo(w*.3,h*.4,w*.6,h*.75);c.quadraticCurveTo(w*.8,h*.55,w,h*.7);c.lineTo(w,h);c.fill();c.fillStyle=cs[3];c.fillRect(0,h*.88,w,h*.12);});
 const pic=(x,y,z,ry,w,h,s)=>{const g=new THREE.Group();g.position.set(x,y,z);g.rotation.y=ry;sc.add(g);box(w+.12,h+.12,.05,0x3a2a1c,0,0,0,{roughness:.6},g);let mp;if(!/noph/.test(location.search)){mp=tx('art'+s,1,[1,1]);mp.wrapS=mp.wrapT=THREE.ClampToEdgeWrapping;}else mp=art(s);plane(w,h,new THREE.MeshStandardMaterial({map:mp,roughness:.55}),0,0,.03,0,g);box(w+.02,.03,.01,0xf4f0e8,0,h/2,.026,{},g);};
 pic(-9.6,5.25,-14.78,0,1.7,1.05,0);pic(9.6,5.25,-14.78,0,1.7,1.05,1);pic(-12.45,2.4,-10.5,Math.PI/2,2.2,1.4,2);
+// Pixel's posters (original art by Pixel, see CREDITS.md) on the concrete pillars between windows
+if(!/noph/.test(location.search)){pic(15.6,3.25,-14.78,0,.72,1.12,'p_faith');pic(3.6,2.7,-14.78,0,.84,1.12,'p_family');pic(-20.78,2.7,9.6,Math.PI/2,.84,1.12,'p_teamwork');}
 // ---- textured rugs
 const kilim=ctex(256,256,(c,w,h)=>{c.fillStyle='#8c6a52';c.fillRect(0,0,w,h);const cs=['#c8b49a','#4a3a30','#6a7060'];for(let y=0;y<h;y+=32){c.fillStyle=cs[(y/32)%3];c.fillRect(0,y+12,w,6);for(let x=0;x<w;x+=32){c.beginPath();c.moveTo(x+16,y+4);c.lineTo(x+28,y+16);c.lineTo(x+16,y+28);c.lineTo(x+4,y+16);c.fill();}}for(let i=0;i<4000;i++){c.fillStyle=`rgba(0,0,0,${RN()*.08})`;c.fillRect(RN()*w,RN()*h,1,2);}});
 kilim.wrapS=kilim.wrapT=THREE.RepeatWrapping;
