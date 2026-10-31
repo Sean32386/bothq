@@ -39,22 +39,22 @@
  },
  "jocko": {
   "outfit_style": "tee",
-  "outfit": "#18181a",
-  "outfit2": "#3a3a3c",
+  "outfit": "#3b4a2f",
+  "outfit2": "#1f1f1f",
   "skin": "#d9a37e",
-  "hair": "bald",
+  "hair": "buzz",
   "hair_color": "#6a5a4c",
   "beard": "full",
-  "hat": "none",
-  "accessory": "none",
-  "prop": "coffee",
+  "hat": "cap",
+  "accessory": "cross_pin",
+  "prop": "dumbbell",
   "mug": "#111111",
   "decor": [
    "dumbbell",
    "trophy",
-   "books"
+   "pennant"
   ],
-  "motto": "Discipline equals freedom."
+  "motto": "Discipline equals freedom. Stay hard."
  },
  "sage": {
   "outfit_style": "blazer",
