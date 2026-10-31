@@ -200,5 +200,24 @@
    "trophy"
   ],
   "motto": "If it can be built, I'm building it."
+ },
+ "pixel": {
+  "outfit_style": "tee",
+  "outfit": "#6b7280",
+  "outfit2": "#d1d5db",
+  "skin": "#d9a77f",
+  "hair": "short",
+  "hair_color": "#3a2a20",
+  "beard": "none",
+  "hat": "none",
+  "accessory": "none",
+  "prop": "none",
+  "mug": "#9ca3af",
+  "decor": [
+   "plant"
+  ],
+  "motto": "",
+  "build": "average",
+  "expression": "calm"
  }
 }

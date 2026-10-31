@@ -80,6 +80,14 @@
    "status": "working",
    "task": "Building Bot HQ",
    "updated": "2026-10-31T01:11:27-04:00"
+  },
+  {
+   "id": "pixel",
+   "name": "Pixel",
+   "station": "Art Studio",
+   "status": "idle",
+   "task": "Getting set up",
+   "updated": "2026-10-31T15:49:43-04:00"
   }
  ]
 }

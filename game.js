@@ -1,7 +1,7 @@
 const TV=new URLSearchParams(location.search).get('tv')==='1';if(TV)document.body.classList.add('tv');
 const W=1280,H=800;
 // station positions (building center) & where the bot hangs out
-const ST={merlin:[640,150],jr:[180,140],jocko:[1000,140],mick:[1160,330],sage:[170,420],shoppy:[1080,620],scout:[400,140],quill:[420,640],ness:[700,650],manny:[880,410]};
+const ST={merlin:[640,150],jr:[180,140],jocko:[1000,140],mick:[1160,330],sage:[170,420],shoppy:[1080,620],scout:[400,140],quill:[420,640],ness:[700,650],manny:[880,410],pixel:[860,560]};
 let scene,bots={},statusData=null;
 function px(g,map,pal,s){map.forEach((row,y)=>[...row].forEach((c,x)=>{if(c!=='.'){g.fillStyle(pal[c]);g.fillRect(x*s,y*s,s,s);}}));}
 function hex(n){return n}
@@ -52,7 +52,7 @@ function drawTown(sc){const g=sc.add.graphics();
  const rnd=new Phaser.Math.RandomDataGenerator(['bothq']);
  for(let i=0;i<70;i++){const x=rnd.between(0,W),y=rnd.between(0,H);if(Math.abs(y-328)<40||Math.abs(x-632)<45)continue;g.fillStyle([0xff6b6b,0xffe066,0xffffff,0xc77dff][i%4]);g.fillRect(x,y,4,4);}
  for(let i=0;i<22;i++){const x=rnd.between(0,W),y=rnd.between(0,H);if(Math.abs(y-328)<60||Math.abs(x-632)<60)continue;g.fillStyle(0x6b4a2b);g.fillRect(x-3,y,6,12);g.fillStyle(0x2f7d32);g.fillCircle(x,y-4,13);g.fillStyle(0x3d9a40);g.fillCircle(x-4,y-8,7);}
- const B=[['merlin',120,150,0x8a8fa8,0x4b3c8f,'Command Tower'],['jr',140,110,0xf2ead7,0x8b2e2e,'Chapel / Study'],['jocko',170,110,0x444444,0x111111,'Gym'],['mick',130,100,0xfff3e0,0xc0392b,'Kitchen'],['sage',150,110,0xdff5e1,0x3fae5a,'Wellness Room'],['shoppy',170,110,0xffe8c2,0xff8a3d,'Grocery Store'],['scout',70,170,0xa0784a,0x5a3a1a,'Lookout Tower'],['quill',130,90,0xe8e0ff,0x2f6fd6,'Writing Desk'],['manny',160,110,0xd6c09a,0x7a5a2f,'Workshop']];
+ const B=[['merlin',120,150,0x8a8fa8,0x4b3c8f,'Command Tower'],['jr',140,110,0xf2ead7,0x8b2e2e,'Chapel / Study'],['jocko',170,110,0x444444,0x111111,'Gym'],['mick',130,100,0xfff3e0,0xc0392b,'Kitchen'],['sage',150,110,0xdff5e1,0x3fae5a,'Wellness Room'],['shoppy',170,110,0xffe8c2,0xff8a3d,'Grocery Store'],['scout',70,170,0xa0784a,0x5a3a1a,'Lookout Tower'],['quill',130,90,0xe8e0ff,0x2f6fd6,'Writing Desk'],['manny',160,110,0xd6c09a,0x7a5a2f,'Workshop'],['pixel',130,80,0xf3eaff,0x9b5de5,'Art Studio']];
  B.forEach(([id,w,h,wa,ro,l])=>{const[x,y]=ST[id];bld(g,x,y-40,w,h,wa,ro,l);});
  if(true){const[x,y]=ST.merlin;g.fillStyle(0x66ccff);g.fillCircle(x,y-120,8);}
  // stage

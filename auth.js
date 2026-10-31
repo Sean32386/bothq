@@ -23,4 +23,5 @@ window.BOTS_META={
  scout:{name:'Scout',role:'Career & research lookout',station:'Lookout Tower',color:0x7a5a2f},
  quill:{name:'Quill',role:'Writer & editor',station:'Writing Desk',color:0x2f6fd6},
  ness:{name:'Ness',role:'Communication & executive-presence coach',station:'Speaking Studio',color:0xe0409a},
- manny:{name:'Manny',role:'Builder – apps, XR, robots',station:'Workshop',color:0xf2c230}};
+ manny:{name:'Manny',role:'Builder – apps, XR, robots',station:'Workshop',color:0xf2c230},
+ pixel:{name:'Pixel',role:'Graphics & visual design artist (works with Manny)',station:'Art Studio',color:0x9b5de5}};

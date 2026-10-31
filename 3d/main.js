@@ -6,8 +6,8 @@ import {RoundedBoxGeometry} from '../vendor/jsm/RoundedBoxGeometry.js';import {R
 const MOBILE=matchMedia('(pointer:coarse)').matches||innerWidth<700, PORTRAIT=()=>innerWidth<innerHeight;
 const CY=0x3fb8a8,MG=0xc4688e,PU=0xffa24a;
 // desk [x,z,yaw]
-const DESK={merlin:[0,-9.2,0],jr:[-16.5,-8.6,0],jocko:[13.5,-7.4,0],sage:[-10,-2.5,Math.PI/2],scout:[-10,2.5,Math.PI/2],quill:[10,-2.5,-Math.PI/2],ness:[10,2.5,-Math.PI/2],shoppy:[7.5,8.6,0],mick:[3.5,8.6,0],manny:[-14,7.6,Math.PI/2]};
-const STATION={merlin:'War Room',jr:'Prayer Corner',jocko:'Gym',sage:'Open Desks',scout:'Open Desks',quill:'Open Desks',ness:'Open Desks',shoppy:'Ops Desk',mick:'Ops Desk',manny:'Build Lab'};
+const DESK={merlin:[0,-9.2,0],jr:[-16.5,-8.6,0],jocko:[13.5,-7.4,0],sage:[-10,-2.5,Math.PI/2],scout:[-10,2.5,Math.PI/2],quill:[10,-2.5,-Math.PI/2],ness:[10,2.5,-Math.PI/2],shoppy:[7.5,8.6,0],mick:[3.5,8.6,0],manny:[-14,7.6,Math.PI/2],pixel:[-14,4.4,Math.PI/2]};
+const STATION={merlin:'War Room',jr:'Prayer Corner',jocko:'Gym',sage:'Open Desks',scout:'Open Desks',quill:'Open Desks',ness:'Open Desks',shoppy:'Ops Desk',mick:'Ops Desk',manny:'Build Lab',pixel:'Art Station'};
 const LOUNGE=[0,1.2];const IDS=Object.keys(DESK);
 const BAR=i=>[11.6+i*.9,11.9];
 const SC={working:0x3dff8a,waiting:0xffb020,idle:0x202838};
@@ -282,7 +282,7 @@ const dust=new THREE.Points(dgeo,new THREE.PointsMaterial({map:dustT,size:.05,tr
 const scrGeo=new THREE.PlaneGeometry(1,.6);
 const bub=ctex(128,96,(g)=>{g.fillStyle='#0d0b1e';g.strokeStyle='#22e6ff';g.lineWidth=5;g.beginPath();g.roundRect(6,6,116,62,18);g.fill();g.stroke();g.beginPath();g.moveTo(40,66);g.lineTo(30,90);g.lineTo(62,66);g.fill();g.stroke();g.fillStyle='#ff9be6';for(const x of[38,64,90]){g.beginPath();g.arc(x,37,8,0,7);g.fill();}});
 // ---------- Stylized characters (personalizable via ../avatars.json) ----------
-const BUILD={jocko:1.2,manny:1.1,mick:1.08,merlin:1.02,sage:.96,shoppy:.98,ness:.95,quill:.95,scout:1,jr:1.03};
+const BUILD={pixel:1,jocko:1.2,manny:1.1,mick:1.08,merlin:1.02,sage:.96,shoppy:.98,ness:.95,quill:.95,scout:1,jr:1.03};
 // hair: procedural strand texture (map+bump+alpha for cards) and anisotropic sheen
 const HAIRT=(()=>{if(MOBILE)return null;const c=document.createElement('canvas');c.width=128;c.height=512;const x=c.getContext('2d');x.fillStyle='#808080';x.fillRect(0,0,128,512);
  for(let i=0;i<900;i++){const px=Math.random()*128,l=120+Math.random()*392,v=90+Math.random()*120|0;x.strokeStyle=`rgba(${v},${v},${v},${.25+Math.random()*.5})`;x.lineWidth=.6+Math.random()*1.1;x.beginPath();x.moveTo(px,0);x.bezierCurveTo(px+(Math.random()-.5)*8,l*.3,px+(Math.random()-.5)*10,l*.6,px+(Math.random()-.5)*12,l);x.stroke();}
@@ -605,10 +605,10 @@ const claim=(k,b)=>{const f=SLOT[k].filter(s=>!s.by);if(!f.length)return null;
  s.by=b.id;b.slot=s;return s;};
 window.__go=(...a)=>go(...a);const go=(b,pos,o={})=>{b.goal=Object.assign({pos:pos.clone(),pose:'stand',anim:'idle'},o);b.path=route(b.grp.position,pos);};
 // demo
-const DEMO=[{merlin:'working',jr:'working',jocko:'working',sage:'working',scout:'working',quill:'working',ness:'waiting',shoppy:'waiting',mick:'working',manny:'working'},
-{merlin:'working',jr:'idle',jocko:'idle',sage:'idle',scout:'idle',quill:'idle',ness:'idle',shoppy:'idle',mick:'idle',manny:'waiting'},
-{merlin:'working',jr:'idle',jocko:'working',sage:'waiting',scout:'working',quill:'idle',ness:'working',shoppy:'idle',mick:'waiting',manny:'working'}];
-const DTASK={merlin:"Routing today's tasks",jr:'Preparing morning devotion',jocko:'Planning 5am workout',sage:'Breathing exercise plan',scout:'Researching FDE roles',quill:'Drafting PD video script',ness:'Coaching executive presence',shoppy:'Building grocery list',mick:'Training block + meal plan',manny:'Wiring Bot HQ 3D'};
+const DEMO=[{merlin:'working',jr:'working',jocko:'working',sage:'working',scout:'working',quill:'working',ness:'waiting',shoppy:'waiting',mick:'working',manny:'working',pixel:'working'},
+{merlin:'working',jr:'idle',jocko:'idle',sage:'idle',scout:'idle',quill:'idle',ness:'idle',shoppy:'idle',mick:'idle',manny:'waiting',pixel:'idle'},
+{merlin:'working',jr:'idle',jocko:'working',sage:'waiting',scout:'working',quill:'idle',ness:'working',shoppy:'idle',mick:'waiting',manny:'working',pixel:'waiting'}];
+const DTASK={merlin:"Routing today's tasks",jr:'Preparing morning devotion',jocko:'Planning 5am workout',sage:'Breathing exercise plan',scout:'Researching FDE roles',quill:'Drafting PD video script',ness:'Coaching executive presence',shoppy:'Building grocery list',mick:'Training block + meal plan',manny:'Wiring Bot HQ 3D',pixel:'Sketching Bot HQ visuals'};
 let demo=false,demoPhase=0,demoNext=0;
 eff=b=>demo?{status:DEMO[demoPhase][b.id],task:DTASK[b.id],name:BOTS_META[b.id].name,demo:true}:(b.data||{status:'idle',task:''});
 const snip=s=>{s=(s||'').trim();return s.length>30?s.slice(0,29)+'…':s;};
