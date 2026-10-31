@@ -21,7 +21,7 @@ r.shadowMap.enabled=true;r.shadowMap.type=THREE.PCFSoftShadowMap;r.toneMapping=T
 const sc=new THREE.Scene();sc.background=new THREE.Color(0x2a2026);sc.fog=new THREE.FogExp2(0x3a2c2a,.011);
 const pm=new THREE.PMREMGenerator(r);sc.environment=pm.fromScene(new RoomEnvironment(),.04).texture;new RGBELoader().load('../assets/hdri/lounge_1k.hdr',h=>{sc.environment=pm.fromEquirectangular(h).texture;h.dispose();});
 const cam=new THREE.PerspectiveCamera(PORTRAIT()?62:48,innerWidth/innerHeight,0.1,200);cam.position.set(0,27,33);if(PORTRAIT())cam.position.set(0,46,11);
-const ctl=new OrbitControls(cam,r.domElement);ctl.enableDamping=true;ctl.dampingFactor=.06;ctl.maxPolarAngle=1.25;ctl.minDistance=6;ctl.maxDistance=60;ctl.autoRotate=true;ctl.autoRotateSpeed=.25;{const q=new URLSearchParams(location.search).get('cam');if(q){ctl.minDistance=.2;ctl.maxPolarAngle=Math.PI*.95;const v=q.split(',').map(Number);cam.position.set(v[0],v[1],v[2]);ctl.target.set(v[3],v[4],v[5]);ctl.autoRotate=false;window.__camLock=1;}}window.__cam=cam;window.__ctl=ctl;
+const ctl=new OrbitControls(cam,r.domElement);ctl.enableDamping=true;ctl.dampingFactor=.06;ctl.maxPolarAngle=1.25;ctl.minDistance=6;ctl.maxDistance=60;ctl.autoRotate=true;ctl.autoRotateSpeed=.25;{const q=new URLSearchParams(location.search).get('cam');if(q){ctl.minDistance=.2;cam.near=.01;cam.updateProjectionMatrix();ctl.maxPolarAngle=Math.PI*.95;const v=q.split(',').map(Number);cam.position.set(v[0],v[1],v[2]);ctl.target.set(v[3],v[4],v[5]);ctl.autoRotate=false;window.__camLock=1;}}window.__cam=cam;window.__ctl=ctl;
 const comp=new EffectComposer(r);comp.addPass(new RenderPass(sc,cam));
 const bloom=new UnrealBloomPass(new THREE.Vector2(innerWidth/(MOBILE?2:1),innerHeight/(MOBILE?2:1)),MOBILE?.18:.1,.35,1.15);if(!MOBILE){const ao=new GTAOPass(sc,cam,innerWidth,innerHeight);ao.output=GTAOPass.OUTPUT.Default;ao.updateGtaoMaterial({radius:.5,distanceExponent:1,thickness:1,scale:1.1,samples:12});ao.blendIntensity=.85;comp.addPass(ao);window.__ao=ao;}
 comp.addPass(bloom);comp.addPass(new OutputPass());if(!MOBILE&&!/nosmaa/.test(location.search)){const sm=new SMAAPass(innerWidth*PR,innerHeight*PR);comp.addPass(sm);window.__smaa=sm;}
@@ -541,7 +541,7 @@ if(!MOBILE&&/[?&]realchar/.test(location.search)&&bots.sage){const b=bots.sage;G
    eg.add(new THREE.Mesh(new THREE.SphereGeometry(rr*.985,32,24),sclM));
    const ir=new THREE.Mesh(new THREE.CircleGeometry(rr*.5,48),irM);ir.position.z=rr*.995;eg.add(ir);
    const co=new THREE.Mesh(new THREE.SphereGeometry(rr*.6,32,16,0,6.283,0,1.1),corM);co.rotation.x=Math.PI/2;co.position.z=rr*.62;eg.add(co);
-   sc.add(eg);eg.updateMatrixWorld(true);hd.attach(eg);}}
+   sc.add(eg);eg.updateMatrixWorld(true);hd.attach(eg);if(/rcnoeyes/.test(location.search))eg.visible=false;}}
  // ---- hair: ~1400 strand ribbons grown over a fitted scalp ellipsoid, falling with gravity, long style; anisotropic sheen
  {const bodyO=[];m.traverse(o=>{if(o.isSkinnedMesh&&o.material===skinM)bodyO.push(o);});const hp=hd.getWorldPosition(new THREE.Vector3()),pts=[],e=new THREE.Vector3();
   for(const o of bodyO){const p=o.geometry.attributes.position;o.updateMatrixWorld(true);for(let i=0;i<p.count;i+=3){e.fromBufferAttribute(p,i);o.applyBoneTransform(i,e);e.applyMatrix4(o.matrixWorld);if(e.y>hp.y+.02&&e.distanceTo(hp)<.3)pts.push(e.clone());}}
@@ -563,7 +563,7 @@ if(!MOBILE&&/[?&]realchar/.test(location.search)&&bots.sage){const b=bots.sage;G
   const hg=new THREE.BufferGeometry();hg.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));hg.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2));hg.setIndex(idx);hg.computeVertexNormals();
   const hm=new THREE.MeshPhysicalMaterial({color:HC,roughness:.38,metalness:0,alphaMap:HCARD,alphaTest:.4,side:THREE.DoubleSide,anisotropy:.85,anisotropyRotation:Math.PI/2,sheen:.35,sheenColor:new THREE.Color(HC).offsetHSL(.02,.05,.1),sheenRoughness:.4,specularIntensity:.35});
   const hair=new THREE.Mesh(hg,hm);hair.castShadow=true;const hgp=new THREE.Group();hgp.add(hair);const cap=new THREE.Mesh(new THREE.SphereGeometry(1,40,24,0,6.283,0,1.22),new THREE.MeshStandardMaterial({color:HC,roughness:.6}));cap.scale.copy(Rd).multiplyScalar(1.045);cap.position.copy(C);hgp.add(cap);
-  hgp.position.copy(hp);const bm=new THREE.Matrix4().makeBasis(rgt,upv,fwd);hgp.quaternion.setFromRotationMatrix(bm);sc.add(hgp);hgp.updateMatrixWorld(true);hd.attach(hgp);window.__hair={n:pos.length/3,C,Rd};}
+  hgp.position.copy(hp);const bm=new THREE.Matrix4().makeBasis(rgt,upv,fwd);hgp.quaternion.setFromRotationMatrix(bm);sc.add(hgp);hgp.updateMatrixWorld(true);hd.attach(hgp);if(/rcnohair/.test(location.search))hgp.visible=false;window.__hgp=hgp;window.__hair={n:pos.length/3,C,Rd};}
  b.rc=()=>{b.grp.traverse(o=>{if(o.isMesh&&o.visible)o.visible=false;});place();b.grp.getWorldQuaternion(gq);
   if(/rcnod/.test(location.search))return;for(const [p,bn,a,r] of map){p.getWorldQuaternion(q);q.premultiply(gqi.copy(gq).invert());q.multiply(a).multiply(r).premultiply(gq);bn.parent.getWorldQuaternion(pq);bn.quaternion.copy(pq.invert().multiply(q));bn.updateMatrixWorld(true);}};
 });}
