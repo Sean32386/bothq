@@ -76,23 +76,23 @@
   "motto": "Rest well, rise strong, live long."
  },
  "mick": {
-  "outfit_style": "chef_coat",
-  "outfit": "#f4f1ea",
-  "outfit2": "#c0392b",
+  "outfit_style": "hoodie",
+  "outfit": "#7a7a7a",
+  "outfit2": "#3a3a3a",
   "skin": "#e6b28e",
-  "hair": "short",
-  "hair_color": "#5a3a22",
-  "beard": "goatee",
-  "hat": "chef",
+  "hair": "buzz",
+  "hair_color": "#5a5a5a",
+  "beard": "stubble",
+  "hat": "beanie",
   "accessory": "none",
-  "prop": "spatula",
+  "prop": "dumbbell",
   "mug": "#c0392b",
   "decor": [
-   "herbs",
-   "books",
-   "trophy"
+   "dumbbell",
+   "trophy",
+   "herbs"
   ],
-  "motto": "Fuel first. Flavor always."
+  "motto": "Eat clean. Lift heavy. Get up, kid."
  },
  "shoppy": {
   "outfit_style": "work_vest",
