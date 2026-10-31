@@ -152,23 +152,23 @@
   "motto": "Every line true. Every role earned."
  },
  "ness": {
-  "outfit_style": "cardigan",
-  "outfit": "#7a5a9a",
-  "outfit2": "#f0e6f4",
+  "outfit_style": "blazer",
+  "outfit": "#1f2a44",
+  "outfit2": "#f4f1ea",
   "skin": "#d8a888",
-  "hair": "bun",
-  "hair_color": "#2a1a22",
+  "hair": "long",
+  "hair_color": "#5a3825",
   "beard": "none",
   "hat": "none",
-  "accessory": "headset",
-  "prop": "notebook",
-  "mug": "#b88ad8",
+  "accessory": "scarf",
+  "prop": "coffee",
+  "mug": "#c9a227",
   "decor": [
+   "books",
    "plant",
-   "candle",
-   "headphones"
+   "trophy"
   ],
-  "motto": "Breathe in. Check in. Level up."
+  "motto": "Warm first, then bold. Say it in 30 seconds."
  },
  "manny": {
   "outfit_style": "work_vest",
