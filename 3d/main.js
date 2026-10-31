@@ -232,7 +232,7 @@ if(!MOBILE&&!new URLSearchParams(location.search).has('nosr')){
  // desk hero props first (closest to camera on tour)
  sr('computer_keyboard_a01',o=>{for(const d of window.SRD){d.kb.forEach(m=>m.visible=false);P(o,0,d.deskY+.002,.1+d.off,0,1.05,d.desk);}});
  sr('computer_mouse_office_b01',o=>{for(const d of window.SRD){if(d.ms)d.ms.visible=false;P(o,.42,d.deskY+.002,.12+d.off,0,.9,d.desk);}});
- sr('dishware_mug_coffee_a01',o=>{for(const d of D()){if(d.mug)d.mug.forEach(m=>m.visible=false);P(o,-.62,d.deskY,.2,2.4,1.1,d.desk);}});
+ sr('dishware_mug_coffee_a01',o=>{for(const d of D()){if(d.mug)d.mug.forEach(m=>m.visible=false);const c=P(o,-.62,d.deskY,.2,2.4,1.1,d.desk),T=()=>{if(!window.__av)return setTimeout(T,500);const mc=window.__av[d.id]&&window.__av[d.id].mug;if(mc)c.traverse(x=>{if(x.isMesh&&x.material){x.material=x.material.clone();x.material.map=null;x.material.color.set(mc);x.material.needsUpdate=true;}});};T();}});
  sr('chair_office_fabric_manager_a01',o=>{CHAIRS.forEach(d=>P(o,0,0,.95,Math.PI,1,d));});
  sr('computer_monitor_office_a01',o=>{for(const d of D())P(o,.74,d.deskY,-.3,-.5,1,d.desk);});
  sr('misc_notebook_a01',o=>{for(const d of D())if(d.idx%2)P(o,.45,d.deskY,.32,.3,1,d.desk);});
