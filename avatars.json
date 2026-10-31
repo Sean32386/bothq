@@ -57,23 +57,23 @@
   "motto": "Discipline equals freedom."
  },
  "sage": {
-  "outfit_style": "athleisure",
-  "outfit": "#3f7a5e",
-  "outfit2": "#d8e8d0",
+  "outfit_style": "blazer",
+  "outfit": "#5b2a86",
+  "outfit2": "#f5f0e6",
   "skin": "#c98e6a",
-  "hair": "ponytail",
-  "hair_color": "#3a2618",
+  "hair": "long",
+  "hair_color": "#3b2417",
   "beard": "none",
-  "hat": "headband",
+  "hat": "crown",
   "accessory": "leaf_pin",
   "prop": "water_bottle",
   "mug": "#6fae7a",
   "decor": [
    "plant",
-   "herbs",
-   "crystal_ball"
+   "candle",
+   "herbs"
   ],
-  "motto": "Sleep, sunlight, strength. Repeat."
+  "motto": "Rest well, rise strong, live long."
  },
  "mick": {
   "outfit_style": "chef_coat",
