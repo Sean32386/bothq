@@ -7,7 +7,7 @@ function px(g,map,pal,s){map.forEach((row,y)=>[...row].forEach((c,x)=>{if(c!=='.
 function hex(n){return n}
 function makeChar(sc,id){const m=BOTS_META[id];const g=sc.make.graphics({add:false});
  const skin=0xf1c27d,body=m.color,dark=0x222222;
- const pal={s:skin,b:body,d:dark,e:0x111111,h:0x5a3a1a,w:0xffffff,y:0xf2c230,Y:0xffd60a,k:0x8b5a2b,g:0x3fae5a,r:0xc0392b,p:0x6a4cff,l:0x9b7ad8};
+ const pal={s:skin,b:body,d:dark,e:0x111111,h:0x5a3a1a,w:0xffffff,y:0xf2c230,Y:0xffd60a,k:0x8b5a2b,g:0x3fae5a,r:0xc0392b,p:0x6a4cff,l:0x9b7ad8,c:0x2b2d42,n:0x1a1a1a,t:0x1fb5a8};
  let base=[
  '....hhhh....','...hhhhhh...','...ssssss...','...sesses...','...ssssss...','....ssss....',
  '..bbbbbbbb..','.sbbbbbbbbs.','.sbbbbbbbbs.','..bbbbbbbb..','..bbb..bbb..','..ddd..ddd..'];
@@ -18,14 +18,17 @@ function makeChar(sc,id){const m=BOTS_META[id];const g=sc.make.graphics({add:fal
   manny:['...YYYYYY...','..YYYYYYYY..'],
   jocko:['....dddd....','...dddddd...'],
   sage:['....gg......','...gggg.....'],
+  pixel:['.....ccc.c..','...cccccc...'], // beret
  };
  const top=over[id]||[];
  const map=[...top,...base];
  // pad to 16 rows
  while(map.length<16)map.unshift('............');
  if(id==='jocko'){for(let i=0;i<map.length;i++)map[i]=map[i].replace(/h/g,'d');}
+ if(id==='pixel'){for(let i=0;i<map.length;i++)map[i]=map[i].replace(/h/g,'n').replace(/b/g,'t');const r=map.length-10;map[r]='..s'+map[r].slice(3,9)+'s..';map[r-1]=map[r-1].slice(0,2)+'s'+map[r-1].slice(3,9)+'s'+map[r-1].slice(10);} // black pixie hair, teal top, elf ears
  [0,1].forEach(f=>{g.clear();const mm=map.slice();
   if(f===1){mm[mm.length-1]='..ddd...ddd.';}
+  if(id==='pixel'){const R0=mm.length-12;[[0xa8f0ff,.55],[0xf7b2ff,.45]].forEach(([c,al],j)=>{g.fillStyle(c,al);g.fillRect(0,(R0+6+j*2)*3,6,(2+j)*3);g.fillRect(30,(R0+6+j*2)*3,6,(2+j)*3);});} // iridescent wings (behind body)
   px(g,mm,pal,3);
   // props
   const P=(c,x,y,w,h)=>{g.fillStyle(c);g.fillRect(x*3,y*3,w*3,h*3);};
@@ -38,6 +41,7 @@ function makeChar(sc,id){const m=BOTS_META[id];const g=sc.make.graphics({add:fal
   if(id==='scout'){P(0x333333,3,R+3,6,1);}
   if(id==='shoppy'){P(0xc8a060,9,R+7,3,3);P(0x3fae5a,9,R+6,1,1);}
   if(id==='sage'){P(0x3fae5a,0,R+7,2,2);}
+  if(id==='pixel'){P(0xf4efe6,10,R+7,2,3);P(0xe84393,10,R+7,2,1);} // notebook
   g.generateTexture(id+'_'+f,36,48);});
 }
 function bld(g,x,y,w,h,wall,roof,label){g.fillStyle(0x000000,0.2);g.fillRect(x-w/2+6,y-h/2+6,w,h);
