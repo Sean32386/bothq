@@ -95,23 +95,23 @@
   "motto": "Fuel first. Flavor always."
  },
  "shoppy": {
-  "outfit_style": "cardigan",
-  "outfit": "#e8845a",
-  "outfit2": "#fff2d8",
+  "outfit_style": "work_vest",
+  "outfit": "#2e7d4f",
+  "outfit2": "#f2efe6",
   "skin": "#f0c4a0",
-  "hair": "curly",
-  "hair_color": "#7a3a1a",
+  "hair": "ponytail",
+  "hair_color": "#a0522d",
   "beard": "none",
-  "hat": "none",
-  "accessory": "scarf",
+  "hat": "cap",
+  "accessory": "leaf_pin",
   "prop": "shopping_bags",
-  "mug": "#ffb84a",
+  "mug": "#e8743b",
   "decor": [
-   "photo",
-   "cactus",
-   "pennant"
+   "herbs",
+   "plant",
+   "trophy"
   ],
-  "motto": "Best deal or no deal."
+  "motto": "Best food, best price, no tips wasted."
  },
  "scout": {
   "outfit_style": "blazer",
