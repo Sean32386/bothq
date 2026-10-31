@@ -68,7 +68,8 @@
    "cap",
    "beanie",
    "headband",
-   "crown"
+   "crown",
+   "beret"
   ],
   "accessory": [
    "none",
@@ -103,6 +104,14 @@
    "cross",
    "flag",
    "star"
+  ],
+  "ears": [
+   "none",
+   "elf"
+  ],
+  "wings": [
+   "none",
+   "iridescent"
   ]
  },
  "decor_items": [
