@@ -15,3 +15,31 @@ materials approximated as glTF PBR, textures resized to 512px WebP, meshes mesho
 
 ## Other assets
 Other textures, HDRIs and models are CC0 (Poly Haven / ambientCG) unless noted.
+
+## NVIDIA SimReady assets (CC-BY 4.0)
+Source: NVIDIA Omniverse SimReady Content (https://docs.omniverse.nvidia.com/simready/), licensed CC-BY 4.0, © NVIDIA Corporation.
+Modifications: converted USD→glTF, UVs rescaled, textures resized to 512/1024 px WebP, meshopt-compressed; some exported without normals. Files: assets/models/opt/sr_*.glb
+
+- TV_a01
+- appliance_toaster_a01
+- bin_waste_a01
+- book_open_a01
+- chair_office_fabric_manager_a01
+- computer_keyboard_a01
+- computer_monitor_office_a01
+- computer_mouse_office_b01
+- decor_candle_a01
+- dishware_bowl_a01
+- dishware_glass_tumbler_a01
+- dishware_mug_coffee_a01
+- food_beverage_coffeeCup_a01
+- furniture_table_coffee_low_a01
+- kitchenware_kettle_a01
+- lamp_table_bedside_a01
+- measurement_clock_alarm_a01
+- misc_glass_vase_a01
+- misc_notebook_a01
+- refrigerator_a01
+- sofa_soft_b01
+- sofa_visitor_a01
+- storage_shelf_basic_a01
