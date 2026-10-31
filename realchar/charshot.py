@@ -12,10 +12,12 @@ async def main():
     for k,(dist,ang,dy) in VIEWS.items():
       if k=='seat':
         await d.evaluate("(()=>{const b=window.__rc.b;setInterval(()=>{b.path.length=0;b.grp.position.copy(b.seat);b.goal={pos:b.seat.clone(),pose:'sit',sit:.5,yaw:b.yaw,anim:'type'};},40)})()");await d.wait_for_timeout(4000)
+      if k.startswith('iso'):
+        await d.evaluate("(()=>{const r=window.__rc;for(const o of window.__sc.children){if(o!==r.m&&!o.isLight)o.visible=false;}})()")
       await d.evaluate("""([dist,ang,dy])=>{clearInterval(window.__ti);window.__ti=setInterval(()=>{const r=window.__rc,V=r.grp.position.constructor;let hd;r.m.traverse(x=>{if(x.name=='head')hd=x;});const h=new V();hd.getWorldPosition(h);h.y+=.08;
        const f=new V(0,0,1).applyQuaternion(r.m.quaternion);f.y=0;f.normalize();f.applyAxisAngle(new V(0,1,0),ang);
-       const c=h.clone().addScaledVector(f,dist);c.y+=dy+(dist>2?.1:0);const t=h.clone();if(dist>2)t.y-=.6;
-       window.__cam.position.copy(c);window.__ctl.target.copy(t);window.__ctl.update();if((window.__hk=(window.__hk||0)+1)%20==3){const D=h.distanceTo(c);window.__ray.set(c,h.clone().sub(c).normalize());window.__ray.far=D-.25;window.__ray.camera=window.__cam;for(const it of window.__ray.intersectObjects(window.__sc.children,true)){let o=it.object,mine=false;for(let x=o;x;x=x.parent)if(x===r.m)mine=true;if(!mine&&!o.isSprite)o.visible=false;}}},30);}""",[dist,ang,dy])
+       const c=h.clone().addScaledVector(f,dist);c.y+=dy+(dist>2?.1:0);const t=h.clone();if(dist>2)t.y-=.6;if(dy<-.6)t.y-=.55;
+       window.__cam.position.copy(c);window.__ctl.target.copy(t);window.__ctl.update();if((window.__hk=(window.__hk||0)+1)%20==3){const D=t.distanceTo(c);window.__ray.set(c,t.clone().sub(c).normalize());window.__ray.far=D-.12;window.__ray.camera=window.__cam;for(const it of window.__ray.intersectObjects(window.__sc.children,true)){let o=it.object,mine=false;for(let x=o;x;x=x.parent)if(x===r.m)mine=true;if(!mine&&!o.isSprite)o.visible=false;}}},30);}""",[dist,ang,dy])
       await d.wait_for_timeout(2500)
       await d.screenshot(path=f'/workspace/bothq/shots/{__import__('os').environ.get('P','real_char2')}_{k}.png',timeout=180000)
     print('errs',E);await b.close()

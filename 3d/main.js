@@ -549,11 +549,11 @@ if(!MOBILE&&/[?&]realchar/.test(location.search)&&bots.sage){const b=bots.sage;G
   const Lp=pts.map(toL),bx=new THREE.Box3().setFromPoints(Lp),C=bx.getCenter(new THREE.Vector3()),Rd=bx.getSize(new THREE.Vector3()).multiplyScalar(.5);C.y=bx.max.y-Rd.y*1.0;Rd.y=Rd.y;
   const E=(x,y,z)=>Math.hypot((x-C.x)/Rd.x,(y-C.y)/Rd.y,(z-C.z)/Rd.z);
   const pos=[],uv=[],idx=[],tan=[];let vi=0;const SEG=22,rnd=Math.random;
-  for(let k=0;k<1500;k++){const th=Math.acos(1-rnd()*1.25),ph=rnd()*6.283;let d=new THREE.Vector3(Math.sin(th)*Math.cos(ph),Math.cos(th),Math.sin(th)*Math.sin(ph));
+  for(let k=0;k<2600;k++){const th=Math.acos(1-rnd()*1.25),ph=rnd()*6.283;let d=new THREE.Vector3(Math.sin(th)*Math.cos(ph),Math.cos(th),Math.sin(th)*Math.sin(ph));
    // skip face: front cone below hairline
-   if(d.z>.05&&d.y<.82)continue;if(d.z>-.35&&d.y<.35)continue;if(d.z>-.1&&d.y<.1&&Math.abs(d.x)<.6)continue;
+   if(d.z>.3)continue;if(d.z>.05&&d.y<.9)continue;if(d.z>-.35&&d.y<.35)continue;if(d.z>-.1&&d.y<.1&&Math.abs(d.x)<.6)continue;
    let p=new THREE.Vector3(C.x+d.x*Rd.x*1.0,C.y+d.y*Rd.y*1.0,C.z+d.z*Rd.z*1.0);const back=-d.z,Lh=(.30+.16*Math.max(0,back)+rnd()*.05),st=Lh/SEG;
-   const n0=new THREE.Vector3(d.x/Rd.x,d.y/Rd.y,d.z/Rd.z).normalize();let dir=new THREE.Vector3(0,-1,-.25).addScaledVector(n0,-new THREE.Vector3(0,-1,-.25).dot(n0)).normalize();if(d.z>-.2){dir.add(new THREE.Vector3(Math.sign(d.x||1)*1.4,0,-.5)).normalize();}if(d.y>.6)dir.lerp(n0,.2).normalize();const w=.009+rnd()*.007;
+   const n0=new THREE.Vector3(d.x/Rd.x,d.y/Rd.y,d.z/Rd.z).normalize();let dir=new THREE.Vector3(0,-1,-.25).addScaledVector(n0,-new THREE.Vector3(0,-1,-.25).dot(n0)).normalize();if(d.z>-.2){dir.set(Math.sign(d.x||(rnd()-.5))*1.0,-.15,-1.1).normalize();}if(d.y>.6)dir.lerp(n0,.2).normalize();const w=.0055+rnd()*.0045;
    for(let s=0;s<=SEG;s++){const n=new THREE.Vector3((p.x-C.x)/Rd.x,(p.y-C.y)/Rd.y,(p.z-C.z)/Rd.z).normalize();const side=new THREE.Vector3().crossVectors(dir,n).normalize().multiplyScalar(w*(1-.6*s/SEG));
     const tn=side.clone().normalize();if(!isFinite(tn.x)||tn.lengthSq()<.5)tn.set(1,0,0);for(const sg of[-1,1]){const q=p.clone().addScaledVector(side,sg);pos.push(q.x,q.y,q.z);uv.push(sg<0?0:1,s/SEG);tan.push(tn.x,tn.y,tn.z,1);}
     if(s<SEG){idx.push(vi,vi+1,vi+2,vi+1,vi+3,vi+2);}vi+=2;
