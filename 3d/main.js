@@ -139,7 +139,7 @@ for(let i=0;i<5;i++)add(new THREE.SphereGeometry(.13,10,8),M(0xe0a868,{roughness
 // cups / drinks on counter
 for(let i=0;i<5;i++){const x=14.2+i*.55,col=[0xffffff,0x22e6ff,0xff3cc7,0xffffff,0xa066ff][i];add(new THREE.CylinderGeometry(.09,.07,.22,12),M(col,{roughness:.3,emissive:i%2?col:0,emissiveIntensity:.3}),x,1.24,13.25);}
 // stools
-for(let i=0;i<5;i++){const x=12.05+i*1.8;add(new THREE.CylinderGeometry(.06,.06,.8,8),M(0x999,{metalness:1,roughness:.2}),x,.4,12.5);add(new THREE.CylinderGeometry(.3,.3,.08,24),LEATH,x,.82,12.5);neon(.5,.02,.02,CY,x,.05,12.5);}
+for(let i=0;i<5;i++){const x=12.05+i*1.8;if(!MOBILE)continue;add(new THREE.CylinderGeometry(.06,.06,.8,8),M(0x999,{metalness:1,roughness:.2}),x,.4,12.5);add(new THREE.CylinderGeometry(.3,.3,.08,24),LEATH,x,.82,12.5);neon(.5,.02,.02,CY,x,.05,12.5);}
 // neon menu board
 const menu=ctex(512,320,(g,w,h)=>{g.fillStyle='#0b0816';g.fillRect(0,0,w,h);g.strokeStyle='#22e6ff';g.lineWidth=6;g.shadowColor='#22e6ff';g.shadowBlur=14;g.strokeRect(8,8,w-16,h-16);
  g.font='900 62px system-ui';g.textAlign='center';g.fillStyle='#ff9be6';g.shadowColor='#ff3cc7';g.fillText('REFUEL',w/2,80);g.font='600 30px system-ui';g.textAlign='left';g.shadowBlur=8;g.shadowColor='#22e6ff';
@@ -184,7 +184,7 @@ const LEAFM=[0x4f7a3a,0x6a8f45,0x3d6a3a,0x7a9a4a].map(c=>new THREE.MeshStandardM
 const LV=[[],[],[],[]];const dm=new THREE.Object3D();
 const lf=(x,y,z,sx,sy,rx,ry,c)=>{dm.position.set(x,y,z);dm.rotation.set(rx,ry,0,'YXZ');dm.scale.set(sx,sy,sx);dm.updateMatrix();LV[c%4].push(dm.matrix.clone());};
 const LEAF=[M(0x4f7a3a,{roughness:.85}),M(0x6a8f45,{roughness:.85}),M(0x3d6a3a,{roughness:.85})];
-const plant=(x,z,sz=1,type=0)=>{add(new THREE.CylinderGeometry(.36*sz,.26*sz,.62*sz,18),TERRA,x,.31*sz,z);add(new THREE.CylinderGeometry(.33*sz,.33*sz,.03,16),M(0x3a2a1c,{roughness:1}),x,.6*sz,z,sc,false);blob(1.1*sz,1.1*sz,x,z);
+const PLQ=[];const plant=(x,z,sz=1,type=0)=>{if(!MOBILE&&!/noph/.test(location.search)){PLQ.push([x,z,sz,type]);blob(1.1*sz,1.1*sz,x,z);if(type===1){add(new THREE.CylinderGeometry(.36*sz,.26*sz,.62*sz,24),TERRA,x,.31*sz,z);add(new THREE.CylinderGeometry(.33*sz,.33*sz,.03,16),M(0x3a2a1c,{roughness:1}),x,.6*sz,z,sc,false);}return;}add(new THREE.CylinderGeometry(.36*sz,.26*sz,.62*sz,18),TERRA,x,.31*sz,z);add(new THREE.CylinderGeometry(.33*sz,.33*sz,.03,16),M(0x3a2a1c,{roughness:1}),x,.6*sz,z,sc,false);blob(1.1*sz,1.1*sz,x,z);
  const y0=.6*sz;if(type===1){for(let i=0;i<9;i++)lf(x+Math.sin(i*2.4)*.08,y0,z+Math.cos(i*2.4)*.08,.16*sz,(1+(i%3)*.25)*sz,.08+(i%3)*.08,i*2.4,i);}
  else for(let i=0;i<13;i++){const a=i*2.4;lf(x,y0+(i%3)*.06,z,(.3+(i%4)*.05)*sz,(.5+(i%3)*.12)*sz,.45+(i%4)*.18,a,i);}};
 const tree=(x,z)=>{add(new THREE.CylinderGeometry(.55,.42,.8,20),TERRA,x,.4,z);blob(1.6,1.6,x,z);add(new THREE.CylinderGeometry(.05,.09,2.1,8),M(0x5a4030,{roughness:.9}),x,1.85,z);
@@ -213,6 +213,12 @@ gm('desk_lamp_arm_01',m=>{LAMPS.forEach(([d,y])=>put(m,.75,y,-.3,-2.4,.7,d));});
 gm('potted_plant_02',m=>{[[-17.6,-13.6],[17.6,13.6],[-5.2,13.5],[12.4,-13.5]].forEach(([x,z],i)=>{put(m,x,0,z,i*1.3,1.7);blob(1.4,1.4,x,z);});});
 if(!MOBILE)GL.load('../assets/models/opt/potted_plant_04.glb',g=>{const src=g.scene;src.traverse(o=>{if(o.isMesh){o.castShadow=o.receiveShadow=true;}});const bb=new THREE.Box3().setFromObject(src),hgt=bb.max.y-bb.min.y;
  [[-3.2,-6.8,1.5],[3.6,-6.9,1.4],[-12.6,13.4,1.6],[19.4,-9.5,1.5],[-19.5,-12.8,1.3],[1.7,13.4,1.5]].forEach(([x,z,H],i)=>{const c=src.clone();c.scale.setScalar(H/hgt);c.position.set(x,0,z);c.rotation.y=i*1.7;sc.add(c);blob(1.2,1.2,x,z);});});
+// Poly Haven CC0 scanned models replacing procedural plants / stools / pendants (desktop)
+{const fit=(src,H)=>{const bb=new THREE.Box3().setFromObject(src);return H/(bb.max.y-bb.min.y);};
+ gm('potted_plant_01',m=>{const k=fit(m,1);PLQ.filter(p=>p[3]!==1).forEach(([x,z,sz],i)=>put(m,x,0,z,i*1.9,k*1.9*sz));});
+ gm('fern_02',m=>{const k=fit(m,1);PLQ.filter(p=>p[3]===1).forEach(([x,z,sz],i)=>put(m,x,.6*sz,z,i*2.3,k*.75*sz));});
+ gm('metal_stool_02',m=>{const k=fit(m,.82);for(let i=0;i<5;i++)put(m,12.05+i*1.8,0,12.5,i*.7,k);});
+ gm('hanging_industrial_lamp',m=>{const bb=new THREE.Box3().setFromObject(m),h=bb.max.y-bb.min.y,k=1.6/h;for(let i=0;i<4;i++){const x=12.6+i*2.3;put(m,x,7.2-bb.max.y*k,13.5,0,k);}});}
 // NVIDIA SimReady props (CC-BY-4.0, converted USD->glTF by us; see ../CREDITS.md). Desktop only, lazy/progressive: loaded one by one after first frames; phones keep the simple versions.
 if(!MOBILE&&!new URLSearchParams(location.search).has('nosr')){
  const SRL=new GLTFLoader().setMeshoptDecoder(MeshoptDecoder);const Q=[];let busy=0;
